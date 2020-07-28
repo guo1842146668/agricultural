@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.puyan.shengren.agricultural.Dao.RoleDao">
+
+    <!--   主要是在主键是自增的情况下，添加成功后可以直接使用主键值，其中keyProperty的值是对象的属性值不是数据库表中的字段名-->
+
+    <resultMap id="BaseResultMap" type="com.puyan.shengren.agricultural.Enity.Role" >
+        <constructor >
+            <idArg column="roleID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="roleName" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="createDate" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
+            <arg column="creator" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="updateDate" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
+            <arg column="updator" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List" >
+    roleID, roleName, createDate, creator, updateDate, updator, status, remark
+    </sql>
+    <select id="getUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from agricultural_user where userID=#{id,jdbcType=INTEGER};
+    </select>
+
+    <insert id="insert" parameterType="com.puyan.shengren.agricultural.Enity.Role" >
+    insert into agricultural_role (roleID, roleName, createDate,
+      creator, updateDate, updator, status, remark)
+    values (
+    null , #{roleName,jdbcType=VARCHAR}, now(), #{creator,jdbcType=INTEGER}, null,
+    null, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+      )
+    </insert>
+
+    <update id="update" parameterType="com.puyan.shengren.agricultural.Enity.Role">
+        update agricultural_role
+        <set>
+            <if test="roleName !=null">
+                roleName=#{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="updator !=null">
+                updator=#{updator,jdbcType=INTEGER},
+            </if>
+            <if test="status !=null">
+                status=#{status,jdbcType=INTEGER},
+            </if>
+            <if test="remark !=null">
+                remark=#{remark,jdbcType=VARCHAR},
+            </if>
+            updateDate=now(),
+        </set>
+        where roleID=#{roleID,jdbcType=INTEGER}
+    </update>
+
+    <select id="getAll" parameterType="com.puyan.shengren.agricultural.Enity.Role" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from agricultural_role
+        <where>
+            <if test="roleName !=null">
+              and  roleName=#{roleName,jdbcType=VARCHAR}
+            </if>
+            <if test="status !=null">
+              and  status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="status ==null">
+              and  status > 0
+            </if>
+        </where>
+
+    </select>
+
+    <update id="updateStatus" parameterType="map">
+        update  agricultural_role set status=#{status,jdbcType=INTEGER} where roleID=#{roleID,jdbcType=INTEGER}
+    </update>
+
+    <select id="getRoleByUserID" parameterType="map" resultType="java.lang.Integer">
+        select  count(userRoleID) from agricultural_user_role
+        where userID=#{userID} and roleID=#{roleID}
+    </select>
+
+    <insert id="insertRoleUser" parameterType="map">
+        insert into agricultural_user_role(userID,roleID) value (#{userID},#{roleID})
+    </insert>
+</mapper>

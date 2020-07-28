@@ -1,0 +1,2619 @@
+
+[[_paths]]
+== 资源
+
+[[_function-controller_resource]]
+=== Function-controller
+方法操作控制类
+
+
+[[_allotfuncitonusingpost]]
+==== 根据角色添加方法权限
+....
+POST /function/allotFunciton
+....
+
+
+===== 说明
+根据角色添加方法权限接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**functiondata** +
+__必填__|方法的ID集合|string
+|**Body**|**roleID** +
+__必填__|角色的ID|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/function/allotFunciton
+----
+
+
+====== 请求 body
+[source,json]
+----
+{ }
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_getallusingget]]
+==== 获取所有权限
+....
+GET /function/getAll
+....
+
+
+===== 说明
+获取所有权限接口
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/function/getAll
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_machinery-controller_resource]]
+=== Machinery-controller
+农业机械操作类
+
+
+[[_getallusingget_1]]
+==== 获取所有农业机械信息
+....
+GET /machinery/getAll
+....
+
+
+===== 说明
+获取所有农业机械信息接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**count** +
+__必填__|分页 - 一页几条数据|ref
+|**Query**|**page** +
+__必填__|分页 - 第几页|ref
+|**Body**|**Machinery** +
+__可选__|筛选条件|<<_com_puyan_shengren_agricultural_enity_machinery,com.puyan.shengren.agricultural.Enity.Machinery>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/machinery/getAll
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "count" : "ref",
+  "page" : "ref"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_insertusingpost]]
+==== 添加农业机械
+....
+POST /machinery/machineryInsert
+....
+
+
+===== 说明
+添加农业机械接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**machinery** +
+__必填__|机械实体类|ref
+|**Query**|**machineryBrand** +
+__可选__|农业机械品牌|string
+|**Query**|**machineryLicense** +
+__可选__|农业机械车牌号|string
+|**Query**|**machineryNO** +
+__可选__|农业机械编号|string
+|**Query**|**machineryOwner** +
+__可选__|农业机械所有者ID|integer (int32)
+|**Query**|**machineryStatus** +
+__可选__|农机状态 1正常 2损坏 3维修 4报废删除|integer (int32)
+|**Query**|**machineryWidth** +
+__可选__|农业机械宽度|number (double)
+|**Query**|**user.city** +
+__可选__|市|string
+|**Query**|**user.cooperative** +
+__可选__|合作社|string
+|**Query**|**user.county** +
+__可选__|县|string
+|**Query**|**user.createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**user.creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**user.email** +
+__可选__|邮箱|string
+|**Query**|**user.lastLoginTime** +
+__可选__|上一次登录时间|string (date-time)
+|**Query**|**user.passWord** +
+__可选__|密码|string
+|**Query**|**user.phone** +
+__可选__|电话|string
+|**Query**|**user.province** +
+__可选__|省|string
+|**Query**|**user.status** +
+__可选__|用户状态 1正常 -1禁用|integer (int32)
+|**Query**|**user.town** +
+__可选__|镇|string
+|**Query**|**user.type** +
+__可选__|人事类型|integer (int32)
+|**Query**|**user.updateDate** +
+__可选__|更新时间|string (date-time)
+|**Query**|**user.updator** +
+__可选__|更新人|integer (int32)
+|**Query**|**user.userName** +
+__可选__|用户名|string
+|**Query**|**user.village** +
+__可选__|村|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/machinery/machineryInsert
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "machinery" : "ref",
+  "machineryBrand" : "string",
+  "machineryLicense" : "string",
+  "machineryNO" : "string",
+  "machineryOwner" : 0,
+  "machineryStatus" : 0,
+  "machineryWidth" : 0.0,
+  "user.city" : "string",
+  "user.cooperative" : "string",
+  "user.county" : "string",
+  "user.createDate" : "string",
+  "user.creator" : 0,
+  "user.email" : "string",
+  "user.lastLoginTime" : "string",
+  "user.passWord" : "string",
+  "user.phone" : "string",
+  "user.province" : "string",
+  "user.status" : 0,
+  "user.town" : "string",
+  "user.type" : 0,
+  "user.updateDate" : "string",
+  "user.updator" : 0,
+  "user.userName" : "string",
+  "user.village" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_updateusingput]]
+==== 修改农业机械信息
+....
+PUT /machinery/update
+....
+
+
+===== 说明
+修改农业机械信息接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**machineryBrand** +
+__可选__|农业机械品牌|string
+|**Query**|**machineryLicense** +
+__可选__|农业机械车牌号|string
+|**Query**|**machineryNO** +
+__可选__|农业机械编号|string
+|**Query**|**machineryOwner** +
+__可选__|农业机械所有者ID|integer (int32)
+|**Query**|**machineryStatus** +
+__可选__|农机状态 1正常 2损坏 3维修 4报废删除|integer (int32)
+|**Query**|**machineryWidth** +
+__可选__|农业机械宽度|number (double)
+|**Query**|**user.city** +
+__可选__|市|string
+|**Query**|**user.cooperative** +
+__可选__|合作社|string
+|**Query**|**user.county** +
+__可选__|县|string
+|**Query**|**user.createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**user.creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**user.email** +
+__可选__|邮箱|string
+|**Query**|**user.lastLoginTime** +
+__可选__|上一次登录时间|string (date-time)
+|**Query**|**user.passWord** +
+__可选__|密码|string
+|**Query**|**user.phone** +
+__可选__|电话|string
+|**Query**|**user.province** +
+__可选__|省|string
+|**Query**|**user.status** +
+__可选__|用户状态 1正常 -1禁用|integer (int32)
+|**Query**|**user.town** +
+__可选__|镇|string
+|**Query**|**user.type** +
+__可选__|人事类型|integer (int32)
+|**Query**|**user.updateDate** +
+__可选__|更新时间|string (date-time)
+|**Query**|**user.updator** +
+__可选__|更新人|integer (int32)
+|**Query**|**user.userName** +
+__可选__|用户名|string
+|**Query**|**user.village** +
+__可选__|村|string
+|**Body**|**machinery** +
+__必填__|机械实体类|<<_com_puyan_shengren_agricultural_enity_machinery,com.puyan.shengren.agricultural.Enity.Machinery>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/machinery/update
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "machineryBrand" : "string",
+  "machineryLicense" : "string",
+  "machineryNO" : "string",
+  "machineryOwner" : 0,
+  "machineryStatus" : 0,
+  "machineryWidth" : 0.0,
+  "user.city" : "string",
+  "user.cooperative" : "string",
+  "user.county" : "string",
+  "user.createDate" : "string",
+  "user.creator" : 0,
+  "user.email" : "string",
+  "user.lastLoginTime" : "string",
+  "user.passWord" : "string",
+  "user.phone" : "string",
+  "user.province" : "string",
+  "user.status" : 0,
+  "user.town" : "string",
+  "user.type" : 0,
+  "user.updateDate" : "string",
+  "user.updator" : 0,
+  "user.userName" : "string",
+  "user.village" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_updatestarususingput]]
+==== 更改农业机械状态
+....
+PUT /machinery/updateStarus
+....
+
+
+===== 说明
+更改农业机械状态接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**machineryID** +
+__必填__|农业机械ID|<<_integer,Integer>>
+|**Body**|**machineryStatus** +
+__必填__|农业机械状态|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/machinery/updateStarus
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_role-controller_resource]]
+=== Role-controller
+角色操作类
+
+
+[[_allotroleusingpost]]
+==== 为用户添加角色
+....
+POST /role/allotRole
+....
+
+
+===== 说明
+为用户添加角色接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**roleID** +
+__必填__|角色ID集合|<<_string,String>>
+|**Body**|**userID** +
+__必填__|用户ID|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/role/allotRole
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_getallusingget_2]]
+==== 查询所有角色
+....
+GET /role/getAll
+....
+
+
+===== 说明
+查询所有角色接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**remark** +
+__可选__|备注|string
+|**Query**|**roleName** +
+__可选__|角色名称|string
+|**Query**|**status** +
+__可选__|状态 1正常 -1禁用|integer (int32)
+|**Query**|**updateDate** +
+__可选__|修改时间|string (date-time)
+|**Query**|**updator** +
+__可选__|修改人|integer (int32)
+|**Body**|**role** +
+__必填__|筛选条件|<<_com_puyan_shengren_agricultural_enity_role,com.puyan.shengren.agricultural.Enity.Role>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/role/getAll
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "createDate" : "string",
+  "creator" : 0,
+  "remark" : "string",
+  "roleName" : "string",
+  "status" : 0,
+  "updateDate" : "string",
+  "updator" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_registerusingpost]]
+==== 添加角色
+....
+POST /role/register
+....
+
+
+===== 说明
+添加角色接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**remark** +
+__可选__|备注|string
+|**Query**|**roleName** +
+__可选__|角色名称|string
+|**Query**|**status** +
+__可选__|状态 1正常 -1禁用|integer (int32)
+|**Query**|**updateDate** +
+__可选__|修改时间|string (date-time)
+|**Query**|**updator** +
+__可选__|修改人|integer (int32)
+|**Body**|**role** +
+__必填__|角色实体类|<<_com_puyan_shengren_agricultural_enity_role,com.puyan.shengren.agricultural.Enity.Role>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/role/register
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "createDate" : "string",
+  "creator" : 0,
+  "remark" : "string",
+  "roleName" : "string",
+  "status" : 0,
+  "updateDate" : "string",
+  "updator" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_updateusingput_1]]
+==== 修改角色
+....
+PUT /role/update
+....
+
+
+===== 说明
+修改角色接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**remark** +
+__可选__|备注|string
+|**Query**|**roleName** +
+__可选__|角色名称|string
+|**Query**|**status** +
+__可选__|状态 1正常 -1禁用|integer (int32)
+|**Query**|**updateDate** +
+__可选__|修改时间|string (date-time)
+|**Query**|**updator** +
+__可选__|修改人|integer (int32)
+|**Body**|**role** +
+__必填__|角色实体类|<<_com_puyan_shengren_agricultural_enity_role,com.puyan.shengren.agricultural.Enity.Role>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/role/update
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "createDate" : "string",
+  "creator" : 0,
+  "remark" : "string",
+  "roleName" : "string",
+  "status" : 0,
+  "updateDate" : "string",
+  "updator" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_updatestatususingput]]
+==== 更改角色状态
+....
+PUT /role/updateStatus
+....
+
+
+===== 说明
+更改角色状态接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**roleID** +
+__必填__|角色ID|<<_integer,Integer>>
+|**Body**|**status** +
+__必填__|状态|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/role/updateStatus
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_stat-controller_resource]]
+=== Stat-controller
+统计信息控制类
+
+
+[[_getallbycountyusingget]]
+==== 县/区统计
+....
+GET /stat/getAllByCounty
+....
+
+
+===== 说明
+县/区统计接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**count** +
+__必填__|分页 - 一页几条数据|<<_integer,Integer>>
+|**Body**|**page** +
+__必填__|分页 - 第几页|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/stat/getAllByCounty
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_getallbymachineryidusingget]]
+==== 农机类型统计
+....
+GET /stat/getAllByMachineryID
+....
+
+
+===== 说明
+农机类型统计
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**count** +
+__必填__|分页 - 一页几条数据|<<_integer,Integer>>
+|**Body**|**page** +
+__必填__|分页 - 第几页|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/stat/getAllByMachineryID
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_getpastsevenusingget]]
+==== 统计过去7天的作业面积
+....
+GET /stat/getPastSeven
+....
+
+
+===== 说明
+统计过去7天的作业面积接口
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/stat/getPastSeven
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_getstatswooknumusingget]]
+==== 统计所有/昨天/今天/ 的农机数，与作业面积
+....
+GET /stat/getStatsWookNum
+....
+
+
+===== 说明
+统计接口
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/stat/getStatsWookNum
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_user-controller_resource]]
+=== User-controller
+用户操作控制类
+
+
+[[_forgetresetpasswordusingput]]
+==== 修改密码
+....
+PUT /user/forgetResetPassword
+....
+
+
+===== 说明
+修改密码接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**newPassWord** +
+__必填__|新密码|<<_string,String>>
+|**Body**|**passWord** +
+__必填__|旧密码|<<_string,String>>
+|**Body**|**updator** +
+__必填__|修改人-当前登录的ID|<<_integer,Integer>>
+|**Body**|**userName** +
+__必填__|用户名|<<_string,String>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_6317df7eb44fcf9f4c3a778f8d8d4dc6,ServerResponse«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user/forgetResetPassword
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "data" : "string",
+  "msg" : "string",
+  "status" : 0,
+  "success" : true
+}
+----
+
+
+[[_getallusingget_3]]
+==== 查询用户信息
+....
+GET /user/getAll
+....
+
+
+===== 说明
+查询用户信息接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**city** +
+__可选__|市|string
+|**Query**|**cooperative** +
+__可选__|合作社|string
+|**Query**|**county** +
+__可选__|县|string
+|**Query**|**createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**email** +
+__可选__|邮箱|string
+|**Query**|**lastLoginTime** +
+__可选__|上一次登录时间|string (date-time)
+|**Query**|**passWord** +
+__可选__|密码|string
+|**Query**|**phone** +
+__可选__|电话|string
+|**Query**|**province** +
+__可选__|省|string
+|**Query**|**status** +
+__可选__|用户状态 1正常 -1禁用|integer (int32)
+|**Query**|**town** +
+__可选__|镇|string
+|**Query**|**type** +
+__可选__|人事类型|integer (int32)
+|**Query**|**updateDate** +
+__可选__|更新时间|string (date-time)
+|**Query**|**updator** +
+__可选__|更新人|integer (int32)
+|**Query**|**userName** +
+__可选__|用户名|string
+|**Query**|**village** +
+__可选__|村|string
+|**Body**|**count** +
+__必填__|分页 - 一页几条数据|<<_integer,Integer>>
+|**Body**|**page** +
+__必填__|分页 - 第几页|<<_integer,Integer>>
+|**Body**|**user** +
+__可选__|筛选条件|<<_com_puyan_shengren_agricultural_enity_user,com.puyan.shengren.agricultural.Enity.User>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user/getAll
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "city" : "string",
+  "cooperative" : "string",
+  "county" : "string",
+  "createDate" : "string",
+  "creator" : 0,
+  "email" : "string",
+  "lastLoginTime" : "string",
+  "passWord" : "string",
+  "phone" : "string",
+  "province" : "string",
+  "status" : 0,
+  "town" : "string",
+  "type" : 0,
+  "updateDate" : "string",
+  "updator" : 0,
+  "userName" : "string",
+  "village" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_getuserbyidusingget]]
+==== 根据ID查用户
+....
+GET /user/getUserById
+....
+
+
+===== 说明
+根据ID查用户接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**userID** +
+__必填__|用户ID|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user/getUserById
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_loginusingget]]
+==== 用户登录
+....
+GET /user/login
+....
+
+
+===== 说明
+用户登录接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**passWord** +
+__必填__|密码|string
+|**Body**|**userName** +
+__必填__|用户名|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_833aa7edc6482d92deadbb2cd7ff18a5,ServerResponse«user对象»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user/login
+----
+
+
+====== 请求 body
+[source,json]
+----
+{ }
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "data" : {
+    "city" : "string",
+    "cooperative" : "string",
+    "county" : "string",
+    "createDate" : "string",
+    "creator" : 0,
+    "email" : "string",
+    "lastLoginTime" : "string",
+    "passWord" : "string",
+    "phone" : "string",
+    "province" : "string",
+    "status" : 0,
+    "town" : "string",
+    "type" : 0,
+    "updateDate" : "string",
+    "updator" : 0,
+    "userName" : "string",
+    "village" : "string"
+  },
+  "msg" : "string",
+  "status" : 0,
+  "success" : true
+}
+----
+
+
+[[_registerusingpost_1]]
+==== 创建用户
+....
+POST /user/register
+....
+
+
+===== 说明
+创建用户接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**city** +
+__可选__|市|string
+|**Query**|**cooperative** +
+__可选__|合作社|string
+|**Query**|**county** +
+__可选__|县|string
+|**Query**|**createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**email** +
+__可选__|邮箱|string
+|**Query**|**lastLoginTime** +
+__可选__|上一次登录时间|string (date-time)
+|**Query**|**passWord** +
+__可选__|密码|string
+|**Query**|**phone** +
+__可选__|电话|string
+|**Query**|**province** +
+__可选__|省|string
+|**Query**|**status** +
+__可选__|用户状态 1正常 -1禁用|integer (int32)
+|**Query**|**town** +
+__可选__|镇|string
+|**Query**|**type** +
+__可选__|人事类型|integer (int32)
+|**Query**|**updateDate** +
+__可选__|更新时间|string (date-time)
+|**Query**|**updator** +
+__可选__|更新人|integer (int32)
+|**Query**|**userName** +
+__可选__|用户名|string
+|**Query**|**village** +
+__可选__|村|string
+|**Body**|**user** +
+__必填__|用户实体|<<_com_puyan_shengren_agricultural_enity_user,com.puyan.shengren.agricultural.Enity.User>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_6317df7eb44fcf9f4c3a778f8d8d4dc6,ServerResponse«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user/register
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "city" : "string",
+  "cooperative" : "string",
+  "county" : "string",
+  "createDate" : "string",
+  "creator" : 0,
+  "email" : "string",
+  "lastLoginTime" : "string",
+  "passWord" : "string",
+  "phone" : "string",
+  "province" : "string",
+  "status" : 0,
+  "town" : "string",
+  "type" : 0,
+  "updateDate" : "string",
+  "updator" : 0,
+  "userName" : "string",
+  "village" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "data" : "string",
+  "msg" : "string",
+  "status" : 0,
+  "success" : true
+}
+----
+
+
+[[_updateusingput_2]]
+==== 修改用户信息
+....
+PUT /user/update
+....
+
+
+===== 说明
+修改用户信息接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**city** +
+__可选__|市|string
+|**Query**|**cooperative** +
+__可选__|合作社|string
+|**Query**|**county** +
+__可选__|县|string
+|**Query**|**createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**email** +
+__可选__|邮箱|string
+|**Query**|**lastLoginTime** +
+__可选__|上一次登录时间|string (date-time)
+|**Query**|**passWord** +
+__可选__|密码|string
+|**Query**|**phone** +
+__可选__|电话|string
+|**Query**|**province** +
+__可选__|省|string
+|**Query**|**status** +
+__可选__|用户状态 1正常 -1禁用|integer (int32)
+|**Query**|**town** +
+__可选__|镇|string
+|**Query**|**type** +
+__可选__|人事类型|integer (int32)
+|**Query**|**updateDate** +
+__可选__|更新时间|string (date-time)
+|**Query**|**updator** +
+__可选__|更新人|integer (int32)
+|**Query**|**userName** +
+__可选__|用户名|string
+|**Query**|**village** +
+__可选__|村|string
+|**Body**|**user** +
+__必填__|用户实体|<<_com_puyan_shengren_agricultural_enity_user,com.puyan.shengren.agricultural.Enity.User>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user/update
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "city" : "string",
+  "cooperative" : "string",
+  "county" : "string",
+  "createDate" : "string",
+  "creator" : 0,
+  "email" : "string",
+  "lastLoginTime" : "string",
+  "passWord" : "string",
+  "phone" : "string",
+  "province" : "string",
+  "status" : 0,
+  "town" : "string",
+  "type" : 0,
+  "updateDate" : "string",
+  "updator" : 0,
+  "userName" : "string",
+  "village" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_updatestatususingput_1]]
+==== 修改用户状态
+....
+PUT /user/updateStatus
+....
+
+
+===== 说明
+修改用户状态接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**status** +
+__必填__|需要修改成的状态|<<_integer,Integer>>
+|**Body**|**userID** +
+__必填__|用户ID|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/user/updateStatus
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_work-controller_resource]]
+=== Work-controller
+作业信息控制类
+
+
+[[_deleteusingdelete]]
+==== 根据ID删除作业信息
+....
+DELETE /work/delete
+....
+
+
+===== 说明
+根据ID删除作业信息接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**workID** +
+__必填__|作业信息ID|<<_integer,Integer>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/work/delete
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_getallusingget_4]]
+==== 查询所有作业信息
+....
+GET /work/getAll
+....
+
+
+===== 说明
+查询所有作业信息接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**city** +
+__可选__|市|string
+|**Query**|**count** +
+__必填__|分页 - 一页几条数据|ref
+|**Query**|**county** +
+__可选__|县|string
+|**Query**|**machinery.machineryBrand** +
+__可选__|农业机械品牌|string
+|**Query**|**machinery.machineryLicense** +
+__可选__|农业机械车牌号|string
+|**Query**|**machinery.machineryNO** +
+__可选__|农业机械编号|string
+|**Query**|**machinery.machineryOwner** +
+__可选__|农业机械所有者ID|integer (int32)
+|**Query**|**machinery.machineryStatus** +
+__可选__|农机状态 1正常 2损坏 3维修 4报废删除|integer (int32)
+|**Query**|**machinery.machineryWidth** +
+__可选__|农业机械宽度|number (double)
+|**Query**|**machinery.user.city** +
+__可选__|市|string
+|**Query**|**machinery.user.cooperative** +
+__可选__|合作社|string
+|**Query**|**machinery.user.county** +
+__可选__|县|string
+|**Query**|**machinery.user.createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**machinery.user.creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**machinery.user.email** +
+__可选__|邮箱|string
+|**Query**|**machinery.user.lastLoginTime** +
+__可选__|上一次登录时间|string (date-time)
+|**Query**|**machinery.user.passWord** +
+__可选__|密码|string
+|**Query**|**machinery.user.phone** +
+__可选__|电话|string
+|**Query**|**machinery.user.province** +
+__可选__|省|string
+|**Query**|**machinery.user.status** +
+__可选__|用户状态 1正常 -1禁用|integer (int32)
+|**Query**|**machinery.user.town** +
+__可选__|镇|string
+|**Query**|**machinery.user.type** +
+__可选__|人事类型|integer (int32)
+|**Query**|**machinery.user.updateDate** +
+__可选__|更新时间|string (date-time)
+|**Query**|**machinery.user.updator** +
+__可选__|更新人|integer (int32)
+|**Query**|**machinery.user.userName** +
+__可选__|用户名|string
+|**Query**|**machinery.user.village** +
+__可选__|村|string
+|**Query**|**page** +
+__必填__|分页 - 第几页|ref
+|**Query**|**province** +
+__可选__|省|string
+|**Query**|**town** +
+__可选__|镇|string
+|**Query**|**verificationResults** +
+__可选__|核对结果|integer (int32)
+|**Query**|**village** +
+__可选__|村|string
+|**Query**|**workArea** +
+__可选__|作业面积|number (double)
+|**Query**|**workDepth** +
+__可选__|作业深度|number (double)
+|**Query**|**workEndMap** +
+__可选__|作业结束坐标|string
+|**Query**|**workEndTime** +
+__可选__|作业结束时间|string (date-time)
+|**Query**|**workLength** +
+__可选__|作业里程|number (double)
+|**Query**|**workMachineryID** +
+__可选__|作业的机械ID|integer (int32)
+|**Query**|**workStartMap** +
+__可选__|作业开始坐标|string
+|**Query**|**workStartTime** +
+__可选__|作业开始时间|string (date-time)
+|**Body**|**work** +
+__可选__|筛选条件|<<_com_puyan_shengren_agricultural_enity_work,com.puyan.shengren.agricultural.Enity.Work>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/work/getAll
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "city" : "string",
+  "count" : "ref",
+  "county" : "string",
+  "machinery.machineryBrand" : "string",
+  "machinery.machineryLicense" : "string",
+  "machinery.machineryNO" : "string",
+  "machinery.machineryOwner" : 0,
+  "machinery.machineryStatus" : 0,
+  "machinery.machineryWidth" : 0.0,
+  "machinery.user.city" : "string",
+  "machinery.user.cooperative" : "string",
+  "machinery.user.county" : "string",
+  "machinery.user.createDate" : "string",
+  "machinery.user.creator" : 0,
+  "machinery.user.email" : "string",
+  "machinery.user.lastLoginTime" : "string",
+  "machinery.user.passWord" : "string",
+  "machinery.user.phone" : "string",
+  "machinery.user.province" : "string",
+  "machinery.user.status" : 0,
+  "machinery.user.town" : "string",
+  "machinery.user.type" : 0,
+  "machinery.user.updateDate" : "string",
+  "machinery.user.updator" : 0,
+  "machinery.user.userName" : "string",
+  "machinery.user.village" : "string",
+  "page" : "ref",
+  "province" : "string",
+  "town" : "string",
+  "verificationResults" : 0,
+  "village" : "string",
+  "workArea" : 0.0,
+  "workDepth" : 0.0,
+  "workEndMap" : "string",
+  "workEndTime" : "string",
+  "workLength" : 0.0,
+  "workMachineryID" : 0,
+  "workStartMap" : "string",
+  "workStartTime" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_updateusingput_3]]
+==== 修改作业信息
+....
+PUT /work/update
+....
+
+
+===== 说明
+修改作业信息接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**city** +
+__可选__|市|string
+|**Query**|**county** +
+__可选__|县|string
+|**Query**|**machinery.machineryBrand** +
+__可选__|农业机械品牌|string
+|**Query**|**machinery.machineryLicense** +
+__可选__|农业机械车牌号|string
+|**Query**|**machinery.machineryNO** +
+__可选__|农业机械编号|string
+|**Query**|**machinery.machineryOwner** +
+__可选__|农业机械所有者ID|integer (int32)
+|**Query**|**machinery.machineryStatus** +
+__可选__|农机状态 1正常 2损坏 3维修 4报废删除|integer (int32)
+|**Query**|**machinery.machineryWidth** +
+__可选__|农业机械宽度|number (double)
+|**Query**|**machinery.user.city** +
+__可选__|市|string
+|**Query**|**machinery.user.cooperative** +
+__可选__|合作社|string
+|**Query**|**machinery.user.county** +
+__可选__|县|string
+|**Query**|**machinery.user.createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**machinery.user.creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**machinery.user.email** +
+__可选__|邮箱|string
+|**Query**|**machinery.user.lastLoginTime** +
+__可选__|上一次登录时间|string (date-time)
+|**Query**|**machinery.user.passWord** +
+__可选__|密码|string
+|**Query**|**machinery.user.phone** +
+__可选__|电话|string
+|**Query**|**machinery.user.province** +
+__可选__|省|string
+|**Query**|**machinery.user.status** +
+__可选__|用户状态 1正常 -1禁用|integer (int32)
+|**Query**|**machinery.user.town** +
+__可选__|镇|string
+|**Query**|**machinery.user.type** +
+__可选__|人事类型|integer (int32)
+|**Query**|**machinery.user.updateDate** +
+__可选__|更新时间|string (date-time)
+|**Query**|**machinery.user.updator** +
+__可选__|更新人|integer (int32)
+|**Query**|**machinery.user.userName** +
+__可选__|用户名|string
+|**Query**|**machinery.user.village** +
+__可选__|村|string
+|**Query**|**province** +
+__可选__|省|string
+|**Query**|**town** +
+__可选__|镇|string
+|**Query**|**verificationResults** +
+__可选__|核对结果|integer (int32)
+|**Query**|**village** +
+__可选__|村|string
+|**Query**|**workArea** +
+__可选__|作业面积|number (double)
+|**Query**|**workDepth** +
+__可选__|作业深度|number (double)
+|**Query**|**workEndMap** +
+__可选__|作业结束坐标|string
+|**Query**|**workEndTime** +
+__可选__|作业结束时间|string (date-time)
+|**Query**|**workLength** +
+__可选__|作业里程|number (double)
+|**Query**|**workMachineryID** +
+__可选__|作业的机械ID|integer (int32)
+|**Query**|**workStartMap** +
+__可选__|作业开始坐标|string
+|**Query**|**workStartTime** +
+__可选__|作业开始时间|string (date-time)
+|**Body**|**work** +
+__必填__|作业信息实体类|<<_com_puyan_shengren_agricultural_enity_work,com.puyan.shengren.agricultural.Enity.Work>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/work/update
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "city" : "string",
+  "county" : "string",
+  "machinery.machineryBrand" : "string",
+  "machinery.machineryLicense" : "string",
+  "machinery.machineryNO" : "string",
+  "machinery.machineryOwner" : 0,
+  "machinery.machineryStatus" : 0,
+  "machinery.machineryWidth" : 0.0,
+  "machinery.user.city" : "string",
+  "machinery.user.cooperative" : "string",
+  "machinery.user.county" : "string",
+  "machinery.user.createDate" : "string",
+  "machinery.user.creator" : 0,
+  "machinery.user.email" : "string",
+  "machinery.user.lastLoginTime" : "string",
+  "machinery.user.passWord" : "string",
+  "machinery.user.phone" : "string",
+  "machinery.user.province" : "string",
+  "machinery.user.status" : 0,
+  "machinery.user.town" : "string",
+  "machinery.user.type" : 0,
+  "machinery.user.updateDate" : "string",
+  "machinery.user.updator" : 0,
+  "machinery.user.userName" : "string",
+  "machinery.user.village" : "string",
+  "province" : "string",
+  "town" : "string",
+  "verificationResults" : 0,
+  "village" : "string",
+  "workArea" : 0.0,
+  "workDepth" : 0.0,
+  "workEndMap" : "string",
+  "workEndTime" : "string",
+  "workLength" : 0.0,
+  "workMachineryID" : 0,
+  "workStartMap" : "string",
+  "workStartTime" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_uploadimgsusingpost]]
+==== 上传图片文件,支持多图片上传
+....
+POST /work/uploadImgs
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**workID** +
+__必填__|需要归属于那一条记录的ID|ref
+|**Body**|**file** +
+__必填__|文件流对象,接收数组格式|< <<_multipartfile,MultipartFile>> > array
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/work/uploadImgs
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "workID" : "ref"
+}
+----
+
+
+====== 请求 body
+[source,json]
+----
+[ null ]
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_insertusingpost_1]]
+==== 录入作业信息
+....
+POST /work/work_insert
+....
+
+
+===== 说明
+录入作业信息接口
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**city** +
+__可选__|市|string
+|**Query**|**county** +
+__可选__|县|string
+|**Query**|**machinery.machineryBrand** +
+__可选__|农业机械品牌|string
+|**Query**|**machinery.machineryLicense** +
+__可选__|农业机械车牌号|string
+|**Query**|**machinery.machineryNO** +
+__可选__|农业机械编号|string
+|**Query**|**machinery.machineryOwner** +
+__可选__|农业机械所有者ID|integer (int32)
+|**Query**|**machinery.machineryStatus** +
+__可选__|农机状态 1正常 2损坏 3维修 4报废删除|integer (int32)
+|**Query**|**machinery.machineryWidth** +
+__可选__|农业机械宽度|number (double)
+|**Query**|**machinery.user.city** +
+__可选__|市|string
+|**Query**|**machinery.user.cooperative** +
+__可选__|合作社|string
+|**Query**|**machinery.user.county** +
+__可选__|县|string
+|**Query**|**machinery.user.createDate** +
+__可选__|创建时间|string (date-time)
+|**Query**|**machinery.user.creator** +
+__可选__|创建人|integer (int32)
+|**Query**|**machinery.user.email** +
+__可选__|邮箱|string
+|**Query**|**machinery.user.lastLoginTime** +
+__可选__|上一次登录时间|string (date-time)
+|**Query**|**machinery.user.passWord** +
+__可选__|密码|string
+|**Query**|**machinery.user.phone** +
+__可选__|电话|string
+|**Query**|**machinery.user.province** +
+__可选__|省|string
+|**Query**|**machinery.user.status** +
+__可选__|用户状态 1正常 -1禁用|integer (int32)
+|**Query**|**machinery.user.town** +
+__可选__|镇|string
+|**Query**|**machinery.user.type** +
+__可选__|人事类型|integer (int32)
+|**Query**|**machinery.user.updateDate** +
+__可选__|更新时间|string (date-time)
+|**Query**|**machinery.user.updator** +
+__可选__|更新人|integer (int32)
+|**Query**|**machinery.user.userName** +
+__可选__|用户名|string
+|**Query**|**machinery.user.village** +
+__可选__|村|string
+|**Query**|**province** +
+__可选__|省|string
+|**Query**|**town** +
+__可选__|镇|string
+|**Query**|**verificationResults** +
+__可选__|核对结果|integer (int32)
+|**Query**|**village** +
+__可选__|村|string
+|**Query**|**workArea** +
+__可选__|作业面积|number (double)
+|**Query**|**workDepth** +
+__可选__|作业深度|number (double)
+|**Query**|**workEndMap** +
+__可选__|作业结束坐标|string
+|**Query**|**workEndTime** +
+__可选__|作业结束时间|string (date-time)
+|**Query**|**workLength** +
+__可选__|作业里程|number (double)
+|**Query**|**workMachineryID** +
+__可选__|作业的机械ID|integer (int32)
+|**Query**|**workStartMap** +
+__可选__|作业开始坐标|string
+|**Query**|**workStartTime** +
+__可选__|作业开始时间|string (date-time)
+|**Body**|**work** +
+__必填__|作业信息实体类|<<_com_puyan_shengren_agricultural_enity_work,com.puyan.shengren.agricultural.Enity.Work>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_result,Result>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/work/work_insert
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "city" : "string",
+  "county" : "string",
+  "machinery.machineryBrand" : "string",
+  "machinery.machineryLicense" : "string",
+  "machinery.machineryNO" : "string",
+  "machinery.machineryOwner" : 0,
+  "machinery.machineryStatus" : 0,
+  "machinery.machineryWidth" : 0.0,
+  "machinery.user.city" : "string",
+  "machinery.user.cooperative" : "string",
+  "machinery.user.county" : "string",
+  "machinery.user.createDate" : "string",
+  "machinery.user.creator" : 0,
+  "machinery.user.email" : "string",
+  "machinery.user.lastLoginTime" : "string",
+  "machinery.user.passWord" : "string",
+  "machinery.user.phone" : "string",
+  "machinery.user.province" : "string",
+  "machinery.user.status" : 0,
+  "machinery.user.town" : "string",
+  "machinery.user.type" : 0,
+  "machinery.user.updateDate" : "string",
+  "machinery.user.updator" : 0,
+  "machinery.user.userName" : "string",
+  "machinery.user.village" : "string",
+  "province" : "string",
+  "town" : "string",
+  "verificationResults" : 0,
+  "village" : "string",
+  "workArea" : 0.0,
+  "workDepth" : 0.0,
+  "workEndMap" : "string",
+  "workEndTime" : "string",
+  "workLength" : 0.0,
+  "workMachineryID" : 0,
+  "workStartMap" : "string",
+  "workStartTime" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+

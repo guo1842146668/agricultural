@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.puyan.shengren.agricultural.Dao.WorkDao">
+
+    <!--   主要是在主键是自增的情况下，添加成功后可以直接使用主键值，其中keyProperty的值是对象的属性值不是数据库表中的字段名-->
+    <resultMap id="BaseResultMap" type="com.puyan.shengren.agricultural.Enity.Work" >
+        <id column="workID" property="workID"></id>
+        <result column="workMachineryID" property="workMachineryID"></result>
+        <result column="workStartTime" property="workStartTime"></result>
+        <result column="workStartMap" property="workStartMap"></result>
+        <result column="workEndTime" property="workEndTime"></result>
+        <result column="workEndMap" property="workEndMap"></result>
+        <result column="drivenDistance" property="drivenDistance"></result>
+        <result column="workLength" property="workLength"></result>
+        <result column="workArea" property="workArea"></result>
+        <result column="workDepth" property="workDepth"></result>
+        <result column="verificationResults" property="verificationResults"></result>
+        <result column="province" property="province"></result>
+        <result column="city" property="city"></result>
+        <result column="county" property="county"></result>
+        <result column="town" property="town"></result>
+        <result column="village" property="village"></result>
+        <collection property="machinery" ofType="com.puyan.shengren.agricultural.Enity.Machinery">
+            <id column="machineryID" property="machineryID"></id>
+            <result column="machineryOwner" property="machineryOwner"></result>
+            <result column="machineryNO" property="machineryNO"></result>
+            <result column="machineryLicense" property="machineryLicense"></result>
+            <result column="machineryBrand" property="machineryBrand"></result>
+            <result column="machineryWidth" property="machineryWidth"></result>
+            <result column="machineryStatus" property="machineryStatus"></result>
+            <collection property="user" ofType="com.puyan.shengren.agricultural.Enity.User">
+                <id column="userID" property="userID"></id>
+                <result column="userName" property="userName"></result>
+                <result column="passWord" property="passWord"></result>
+                <result column="phone" property="phone"></result>
+                <result column="email" property="email"></result>
+                <result column="type" property="type"></result>
+                <result column="status" property="status"></result>
+                <result column="lastLoginTime" property="lastLoginTime"></result>
+                <result column="createDate" property="createDate"></result>
+                <result column="creator" property="creator"></result>
+                <result column="updateDate" property="updateDate"></result>
+                <result column="updator" property="updator"></result>
+                <result column="province" property="province"></result>
+                <result column="city" property="city"></result>
+                <result column="county" property="county"></result>
+                <result column="town" property="town"></result>
+                <result column="village" property="village"></result>
+                <result column="cooperative" property="cooperative"></result>
+            </collection>
+        </collection>
+    </resultMap>
+    <insert id="insert" parameterType="com.puyan.shengren.agricultural.Enity.Work">
+        insert into agricultural_work(workMachineryID,workStartTime,workStartMap,workEndTime,workEndMap,drivenDistance,workLength,
+        workArea,workDepth,verificationResults,province,city,county,town,village)
+        value (#{workMachineryID},now(),#{workStartMap},#{workEndTime},#{workEndMap},#{drivenDistance},#{workLength},
+        #{workArea},#{workDepth},#{verificationResults},#{province},#{city},#{county},#{town},#{village})
+    </insert>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        delete from agricultural_work where workID = #{workID}
+    </update>
+
+    <update id="update" parameterType="com.puyan.shengren.agricultural.Enity.Work">
+        update  agricultural_work
+        <set>
+            <if test="workMachineryID !=null">
+                workMachineryID = #{workMachineryID},
+            </if>
+            <if test="workStartTime !=null">
+                workStartTime = #{workStartTime},
+            </if>
+            <if test="workStartMap !=null">
+                workStartMap = #{workStartMap},
+            </if>
+            <if test="workEndTime !=null">
+                workEndTime = #{workEndTime},
+            </if>
+            <if test="workEndMap !=null">
+                workEndMap = #{workEndMap},
+            </if>
+            <if test="workLength !=null">
+                workLength = #{workLength},
+            </if>
+            <if test="workArea !=null">
+                workArea = #{workArea},
+            </if>
+            <if test="verificationResults !=null">
+                verificationResults = #{verificationResults},
+            </if>
+            <if test="province !=null">
+                province = #{province},
+            </if>
+            <if test="city !=null">
+                city = #{city},
+            </if>
+            <if test="county !=null">
+                county = #{county},
+            </if>
+            <if test="town !=null">
+                town = #{town},
+            </if>
+            <if test="village !=null">
+                village = #{village},
+            </if>
+        </set>
+        where workID = #{workID}
+    </update>
+
+    <select id="getAll" parameterType="com.puyan.shengren.agricultural.Enity.Work" resultMap="BaseResultMap">
+        SELECT w.*,m.*,u.* from agricultural_work w,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and m.machineryOwner=u.userID
+        <if test="workMachineryID !=null">
+             and w.workMachineryID = #{workMachineryID}
+        </if>
+        <if test="workStartTime !=null">
+             and w.workStartTime &gt;= #{workStartTime}
+        </if>
+        <if test="workEndTime !=null">
+             and w.workEndTime &lt;= #{workEndTime}
+        </if>
+        <if test="verificationResults !=null">
+             and w.verificationResults = #{verificationResults}
+        </if>
+            <if test="machinery !=null">
+                <if test="machinery.machineryLicense !=null">
+                    and m.machineryLicense=#{machinery.machineryLicense}
+                </if>
+                <if test="machinery.machineryNO !=null">
+                    and m.machineryNO=#{machinery.machineryNO}
+                </if>
+                <if test="machinery.user!=null">
+                    <if test="machinery.user.userName !=null">
+                        and u.userName=#{machinery.user.userName}
+                    </if>
+                    <if test="machinery.user.phone !=null">
+                        and u.phone=#{machinery.user.phone}
+                    </if>
+                    <if test="machinery.user.email !=null">
+                        and u.email=#{machinery.user.email}
+                    </if>
+                    <if test="machinery.user.province !=null">
+                        and u.province=#{machinery.user.province}
+                    </if>
+                    <if test="machinery.user.city !=null">
+                        and u.city=#{machinery.user.city}
+                    </if>
+                    <if test="machinery.user.county !=null">
+                        and u.county=#{machinery.user.county}
+                    </if>
+                    <if test="machinery.user.town !=null">
+                        and u.town=#{machinery.user.town}
+                    </if>
+                    <if test="machinery.user.village !=null">
+                        and u.village=#{machinery.user.village}
+                    </if>
+                    <if test="machinery.user.cooperative !=null">
+                        and u.cooperative=#{machinery.user.cooperative}
+                    </if>
+                </if>
+            </if>
+        <if test="workID !=null">
+            and w.workID = #{workID}
+        </if>
+    </select>
+</mapper>

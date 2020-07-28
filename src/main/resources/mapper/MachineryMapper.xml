@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.puyan.shengren.agricultural.Dao.MachineryDao">
+
+    <!--   主要是在主键是自增的情况下，添加成功后可以直接使用主键值，其中keyProperty的值是对象的属性值不是数据库表中的字段名-->
+    <resultMap id="BaseResultMap" type="com.puyan.shengren.agricultural.Enity.Machinery" >
+        <id column="machineryID" property="machineryID"></id>
+        <result column="machineryOwner" property="machineryOwner"></result>
+        <result column="machineryNO" property="machineryNO"></result>
+        <result column="machineryIMEI" property="machineryIMEI"></result>
+        <result column="machineryLicense" property="machineryLicense"></result>
+        <result column="machineryBrand" property="machineryBrand"></result>
+        <result column="machineryWidth" property="machineryWidth"></result>
+        <result column="machineryStatus" property="machineryStatus"></result>
+        <collection property="user" ofType="com.puyan.shengren.agricultural.Enity.User">
+            <id column="userID" property="userID"></id>
+            <result column="userName" property="userName"></result>
+            <result column="passWord" property="passWord"></result>
+            <result column="phone" property="phone"></result>
+            <result column="email" property="email"></result>
+            <result column="type" property="type"></result>
+            <result column="status" property="status"></result>
+            <result column="lastLoginTime" property="lastLoginTime"></result>
+            <result column="createDate" property="createDate"></result>
+            <result column="creator" property="creator"></result>
+            <result column="updateDate" property="updateDate"></result>
+            <result column="updator" property="updator"></result>
+            <result column="province" property="province"></result>
+            <result column="city" property="city"></result>
+            <result column="county" property="county"></result>
+            <result column="town" property="town"></result>
+            <result column="village" property="village"></result>
+            <result column="cooperative" property="cooperative"></result>
+        </collection>
+    </resultMap>
+    <insert id="insert" parameterType="com.puyan.shengren.agricultural.Enity.Machinery">
+        insert into agricultural_machinery(machineryOwner,machineryNO,machineryIMEI,machineryLicense,machineryBrand,machineryWidth,machineryStatus)
+        value (#{machineryOwner},#{machineryNO},#{machineryIMEI},#{machineryLicense},#{machineryBrand},#{machineryWidth},#{machineryStatus})
+    </insert>
+
+    <update id="updateStarus" parameterType="map">
+        update agricultural_machinery set machineryStatus=#{machineryStatus}
+        where machineryID=#{machineryID}
+    </update>
+
+    <update id="update" parameterType="com.puyan.shengren.agricultural.Enity.Machinery">
+        update  agricultural_machinery
+        <set>
+            <if test="machineryOwner !=null">
+                machineryOwner=#{machineryOwner},
+            </if>
+            <if test="machineryNO !=null">
+                machineryNO=#{machineryNO},
+            </if>
+            <if test="machineryIMEI !=null">
+                machineryIMEI=#{machineryIMEI}
+            </if>
+            <if test="machineryLicense !=null">
+                machineryLicense=#{machineryLicense},
+            </if>
+            <if test="machineryBrand !=null">
+                machineryBrand=#{machineryBrand},
+            </if>
+            <if test="machineryWidth !=null">
+                machineryWidth=#{machineryWidth},
+            </if>
+            <if test="machineryStatus !=null">
+                machineryStatus=#{machineryStatus},
+            </if>
+        </set>
+        where machineryID=#{machineryID}
+    </update>
+
+    <select id="getAll" parameterType="Machinery" resultMap="BaseResultMap">
+        select * from agricultural_machinery m,agricultural_user u where m.machineryOwner=u.userID
+        <if test="user!=null">
+            <if test="user.userName !=null">
+                and u.userName = #{user.userName}
+            </if>
+            <if test="user.phone !=null">
+                and u.phone = #{user.phone}
+            </if>
+            <if test="user.email !=null">
+                and u.email = #{user.email}
+            </if>
+            <if test="user.province !=null">
+                and u.province = #{user.province}
+            </if>
+            <if test="user.city !=null">
+                and u.city = #{user.city}
+            </if>
+            <if test="user.county !=null">
+                and u.county = #{user.county}
+            </if>
+            <if test="user.town !=null">
+                and u.town = #{user.town}
+            </if>
+            <if test="user.village !=null">
+                and u.village = #{user.village}
+            </if>
+            <if test="user.cooperative !=null">
+                and u.cooperative = #{user.cooperative}
+            </if>
+        </if>
+        <if test="machineryLicense !=null">
+            and m.machineryLicense = #{machineryLicense}
+        </if>
+        <if test="machineryNO !=null">
+            and m.machineryNO = #{machineryNO}
+        </if>
+        <if test="machineryIMEI !=null">
+            and machineryIMEI = #{machineryIMEI}
+        </if>
+    </select>
+
+
+    <select id="getMachineryIsEmpty" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT m.*,u.* from agricultural_machinery m LEFT JOIN agricultural_user u
+        on  m.machineryOwner=u.userID where m.machineryNO=#{machineryNO}
+    </select>
+</mapper>

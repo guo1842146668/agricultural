@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.puyan.shengren.agricultural.Dao.StatDao">
+
+    <!--   主要是在主键是自增的情况下，添加成功后可以直接使用主键值，其中keyProperty的值是对象的属性值不是数据库表中的字段名-->
+
+   <select id="getAllByCounty" resultType="java.util.Map">
+       select province,city,county,COUNT(workMachineryID) as '农机数量',SUM(workLength) as '作业里程',SUM(workArea) as '作业面积'
+       from  agricultural_work GROUP BY county
+   </select>
+
+    <select id="getAllByMachineryID" resultType="java.util.Map">
+        select m.machineryName, COUNT(w.workMachineryID) as '农机数量',SUM(w.workLength) as '作业里程',SUM(w.workArea) as '作业面积'
+        from  agricultural_work w,agricultural_machinery m
+        where w.workMachineryID=m.machineryID
+        GROUP BY w.workMachineryID
+    </select>
+
+    <select id="getStatsWookNum" resultType="java.util.Map">
+        SELECT
+        (select count(*)  from agricultural_machinery ) as '农机总数量',
+        (SELECT COUNT(*) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as '今天作业数量',
+        (SELECT COUNT(*)  from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业数量',
+        (SELECT SUM(workArea) from agricultural_work) as '作业总面积',
+        (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as'今天作业面积',
+        (SELECT SUM(workArea)  from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业面积',
+        (SELECT SUM(workLength)  from agricultural_work) as '作业总里程',
+        (SELECT SUM(workLength)  from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as '今天作业里程',
+        (SELECT SUM(workLength)  from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业里程';
+
+   </select>
+
+    <select id="getPastSeven" resultType="java.util.Map">
+    select
+    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as 'one',
+    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 2 DAY)) as 'two',
+    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 3 DAY)) as 'three',
+    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 4 DAY)) as 'four',
+    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 5 DAY)) as 'Fives',
+    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 6 DAY)) as 'six',
+    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 7 DAY)) as 'Seven';
+    </select>
+</mapper>

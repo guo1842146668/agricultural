@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.puyan.shengren.agricultural.Dao.FunctionDao">
+
+    <!--   主要是在主键是自增的情况下，添加成功后可以直接使用主键值，其中keyProperty的值是对象的属性值不是数据库表中的字段名-->
+
+    <resultMap id="BaseResultMap" type="com.puyan.shengren.agricultural.Enity.Function" >
+        <constructor >
+            <idArg column="functionID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="functionName" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="linkedUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="parentID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="orderNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    functionID, functionName, linkedUrl, parentID, orderNum, status
+    </sql>
+
+    <select id="getAllByUserID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+       select f.functionID,f.functionName,f.linkedUrl,f.parentID,f.orderNum,f.status from
+       agricultural_function f,agricultural_user u,agricultural_role r,
+       agricultural_role_function rf,agricultural_user_role ur
+       where f.functionID=rf.functionID and r.roleID=rf.roleID and u.userID=ur.userID and
+       r.roleID=ur.roleID and f.`status` > 0 and u.userID=#{userID} GROUP BY f.parentID,f.orderNum
+    </select>
+
+    <select id="getAllFunctions"  resultMap="BaseResultMap">
+       select f.functionID,f.functionName,f.linkedUrl,f.parentID,f.orderNum,f.status from
+       agricultural_function f,agricultural_user u,agricultural_role r,
+       agricultural_role_function rf,agricultural_user_role ur
+       where f.functionID=rf.functionID and r.roleID=rf.roleID and u.userID=ur.userID and
+       r.roleID=ur.roleID and f.`status` > 0  GROUP BY f.parentID,f.orderNum
+    </select>
+
+    <select id="getAll"  resultMap="BaseResultMap">
+       select  <include refid="Base_Column_List" /> from agricultural_function where agricultural_function.`status` > 0
+    </select>
+
+    <select id="getFunctionByfunctionID" parameterType="map" resultType="java.lang.Integer">
+        select count(roleFunctionID) from agricultural_role_function rf
+        where rf.roleID=#{roleID} and functionID=#{functionID}
+    </select>
+
+    <insert id="insert" parameterType="map">
+        insert into agricultural_role_function(roleID,functionID) value(#{roleID},#{functionID})
+    </insert>
+</mapper>
