@@ -57,8 +57,8 @@ public class StatController {
      **/
     @ApiOperation(value="农机类型统计", notes="农机类型统计")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "分页 - 第几页", required = true ,dataType = "Integer"),
-            @ApiImplicitParam(name = "count", value = "分页 - 一页几条数据", required = true ,dataType = "Integer")
+            @ApiImplicitParam(name = "page", value = "分页 - 第几页", required = true ,dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "count", value = "分页 - 一页几条数据", required = true ,dataType = "Integer", paramType = "query")
     })
     @GetMapping("/getAllByMachineryID")
     @ResponseBody
