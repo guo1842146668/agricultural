@@ -1,7 +1,7 @@
 package com.puyan.shengren.agricultural;
 
 import com.alibaba.fastjson.JSONObject;
-import com.puyan.shengren.agricultural.Tool.CalculateUtil;
+import com.puyan.shengren.agricultural.tool.CalculateUtil;
 import io.github.swagger2markup.GroupBy;
 import io.github.swagger2markup.Language;
 import io.github.swagger2markup.Swagger2MarkupConfig;

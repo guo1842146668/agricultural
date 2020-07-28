@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.puyan.shengren.agricultural.Dao.UserDao">
+<mapper namespace="com.puyan.shengren.agricultural.dao.UserDao">
 
     <!--   主要是在主键是自增的情况下，添加成功后可以直接使用主键值，其中keyProperty的值是对象的属性值不是数据库表中的字段名-->
 
-    <resultMap id="BaseResultMap" type="com.puyan.shengren.agricultural.Enity.User" >
+    <resultMap id="BaseResultMap" type="com.puyan.shengren.agricultural.enity.User" >
         <id column="userID" property="userID"></id>
         <result column="userName" property="userName"></result>
         <result column="passWord" property="passWord"></result>
@@ -34,7 +34,7 @@
         select <include refid="Base_Column_List" /> from agricultural_user where userID=#{id,jdbcType=INTEGER};
     </select>
 
-    <insert id="insert" parameterType="com.puyan.shengren.agricultural.Enity.User" >
+    <insert id="insert" parameterType="com.puyan.shengren.agricultural.enity.User" >
     insert into agricultural_user (userID, userName, passWord,
       phone, email, type, status, lastLoginTime, createDate,
       creator, updateDate, updator, province, city, county, town,
@@ -61,7 +61,7 @@
         update agricultural_user set passWord=#{passWord},updateDate=now(),updator=#{updator} where userName=#{userName}
     </update>
 
-    <update id="update" parameterType="com.puyan.shengren.agricultural.Enity.User">
+    <update id="update" parameterType="com.puyan.shengren.agricultural.enity.User">
         update agricultural_user
         <set>
             <if test="userName !=null">
@@ -105,7 +105,7 @@
         where userID=#{userID}
     </update>
 
-    <select id="getAll" parameterType="com.puyan.shengren.agricultural.Enity.User" resultMap="BaseResultMap">
+    <select id="getAll" parameterType="com.puyan.shengren.agricultural.enity.User" resultMap="BaseResultMap">
         select  <include refid="Base_Column_List"/> from agricultural_user
         <where>
             <if test="userName !=null">
