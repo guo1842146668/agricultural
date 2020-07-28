@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  **/
 @Api(value = "StatController", description = "统计信息控制类")
 @RestController
-@RequestMapping("stat")
+@RequestMapping("/stat")
 public class StatController {
     @Resource
     private StatService statService;
@@ -38,8 +38,8 @@ public class StatController {
      **/
     @ApiOperation(value="县/区统计", notes="县/区统计接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "分页 - 第几页", required = true ,dataType = "Integer"),
-            @ApiImplicitParam(name = "count", value = "分页 - 一页几条数据", required = true ,dataType = "Integer")
+            @ApiImplicitParam(name = "page", value = "分页 - 第几页", required = true ,dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "count", value = "分页 - 一页几条数据", required = true ,dataType = "Integer", paramType = "query")
     })
     @GetMapping("/getAllByCounty")
     @ResponseBody

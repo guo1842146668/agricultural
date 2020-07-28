@@ -32,7 +32,7 @@ public class WorkController {
      **/
     @ApiOperation(value="录入作业信息", notes="录入作业信息接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "work", value = "作业信息实体类", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.Work"),
+            @ApiImplicitParam(name = "work", value = "作业信息实体类", required = true ,dataType = "com.puyan.shengren.agricultural.enity.Work"),
     })
     @PostMapping("/work_insert")
     @ResponseBody
@@ -66,7 +66,7 @@ public class WorkController {
      **/
     @ApiOperation(value="修改作业信息", notes="修改作业信息接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "work", value = "作业信息实体类", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.Work"),
+            @ApiImplicitParam(name = "work", value = "作业信息实体类", required = true ,dataType = "com.puyan.shengren.agricultural.enity.Work"),
     })
     @PutMapping("/update")
     @ResponseBody
@@ -85,7 +85,7 @@ public class WorkController {
      **/
     @ApiOperation(value="查询所有作业信息", notes="查询所有作业信息接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "work", value = "筛选条件", required = false ,dataType = "com.puyan.shengren.agricultural.Enity.Work"),
+            @ApiImplicitParam(name = "work", value = "筛选条件", required = false ,dataType = "com.puyan.shengren.agricultural.enity.Work"),
             @ApiImplicitParam(name = "page", value = "分页 - 第几页", required = true ,dataType = "Integer",paramType = "query"),
             @ApiImplicitParam(name = "count", value = "分页 - 一页几条数据", required = true ,dataType = "Integer",paramType = "query")
     })

@@ -34,7 +34,7 @@ public class MachineryController {
      **/
     @ApiOperation(value="添加农业机械", notes="添加农业机械接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "machinery", value = "机械实体类", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.Machinery",paramType = "query"),
+            @ApiImplicitParam(name = "machinery", value = "机械实体类", required = true ,dataType = "com.puyan.shengren.agricultural.enity.Machinery",paramType = "query"),
     })
     @PostMapping("/machineryInsert")
     @ResponseBody
@@ -70,7 +70,7 @@ public class MachineryController {
      **/
     @ApiOperation(value="修改农业机械信息", notes="修改农业机械信息接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "machinery", value = "机械实体类", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.Machinery"),
+            @ApiImplicitParam(name = "machinery", value = "机械实体类", required = true ,dataType = "com.puyan.shengren.agricultural.enity.Machinery"),
     })
     @PutMapping("/update")
     @ResponseBody
@@ -89,7 +89,7 @@ public class MachineryController {
      **/
     @ApiOperation(value="获取所有农业机械信息", notes="获取所有农业机械信息接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "Machinery", value = "筛选条件", required = false ,dataType = "com.puyan.shengren.agricultural.Enity.Machinery"),
+            @ApiImplicitParam(name = "Machinery", value = "筛选条件", required = false ,dataType = "com.puyan.shengren.agricultural.enity.Machinery"),
             @ApiImplicitParam(name = "page", value = "分页 - 第几页", required = true ,dataType = "Integer",paramType="query"),
             @ApiImplicitParam(name = "count",value = "分页 - 一页几条数据", required = true ,dataType = "Integer",paramType="query")
     })

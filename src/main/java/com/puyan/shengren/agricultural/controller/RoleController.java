@@ -35,7 +35,7 @@ public class RoleController {
      **/
     @ApiOperation(value="添加角色", notes="添加角色接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "role", value = "角色实体类", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.Role"),
+            @ApiImplicitParam(name = "role", value = "角色实体类", required = true ,dataType = "com.puyan.shengren.agricultural.enity.Role"),
     })
     @PostMapping("/register")
     @ResponseBody
@@ -52,7 +52,7 @@ public class RoleController {
      **/
     @ApiOperation(value="修改角色", notes="修改角色接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "role", value = "角色实体类", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.Role"),
+            @ApiImplicitParam(name = "role", value = "角色实体类", required = true ,dataType = "com.puyan.shengren.agricultural.enity.Role"),
     })
     @PutMapping("/update")
     @ResponseBody
@@ -65,12 +65,12 @@ public class RoleController {
      * @Description  查询所有的角色
      * @Date  2020/7/22 11:03
      * @Param * @param role:
-     * @return * @return: com.puyan.shengren.agricultural.common.ServerResponse<com.puyan.shengren.agricultural.Enity.Role>
+     * @return * @return: com.puyan.shengren.agricultural.common.ServerResponse<com.puyan.shengren.agricultural.enity.Role>
      *     返回角色DATA
      **/
     @ApiOperation(value="查询所有角色", notes="查询所有角色接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "role", value = "筛选条件", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.Role"),
+            @ApiImplicitParam(name = "role", value = "筛选条件", required = true ,dataType = "com.puyan.shengren.agricultural.enity.Role"),
     })
     @GetMapping("/getAll")
     @ResponseBody

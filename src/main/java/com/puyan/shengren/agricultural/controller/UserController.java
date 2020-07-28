@@ -36,7 +36,7 @@ public class UserController {
      * @Date  2020/7/21 18:14
      * @Param * @param userName: 用户名
      * @param passWord:  密码
-     * @return * @return: com.puyan.shengren.agricultural.common.ServerResponse<com.puyan.shengren.agricultural.Enity.User>
+     * @return * @return: com.puyan.shengren.agricultural.common.ServerResponse<com.puyan.shengren.agricultural.enity.User>
      *     登录成功返回用户信息   密码已经清空
      **/
     @ApiOperation(value="用户登录", notes="用户登录接口")
@@ -70,7 +70,7 @@ public class UserController {
      **/
     @ApiOperation(value="创建用户", notes="创建用户接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "user", value = "用户实体", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.User"),
+            @ApiImplicitParam(name = "user", value = "用户实体", required = true ,dataType = "com.puyan.shengren.agricultural.enity.User"),
     })
     @PostMapping("/register")
     @ResponseBody
@@ -83,7 +83,7 @@ public class UserController {
      * @Description  通过ID查询个人信息
      * @Date  2020/7/21 18:21
      * @Param * @param id:
-     * @return * @return: com.puyan.shengren.agricultural.Enity.User
+     * @return * @return: com.puyan.shengren.agricultural.enity.User
      * 返回查询到的对象
      **/
     @ApiOperation(value="根据ID查用户", notes="根据ID查用户接口")
@@ -129,7 +129,7 @@ public class UserController {
      **/
     @ApiOperation(value="修改用户信息", notes="修改用户信息接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "user", value = "用户实体", required = true ,dataType = "com.puyan.shengren.agricultural.Enity.User"),
+            @ApiImplicitParam(name = "user", value = "用户实体", required = true ,dataType = "com.puyan.shengren.agricultural.enity.User"),
     })
     @PutMapping("/update")
     @ResponseBody
@@ -142,12 +142,12 @@ public class UserController {
      * @Description  查询所有用户
      * @Date  2020/7/22 11:00
      * @Param * @param user:
-     * @return * @return: com.puyan.shengren.agricultural.common.ServerResponse<com.puyan.shengren.agricultural.Enity.User>
+     * @return * @return: com.puyan.shengren.agricultural.common.ServerResponse<com.puyan.shengren.agricultural.enity.User>
      *     返回用户DATA
      **/
     @ApiOperation(value="查询用户信息", notes="查询用户信息接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "user", value = "筛选条件", required = false ,dataType = "com.puyan.shengren.agricultural.Enity.User"),
+            @ApiImplicitParam(name = "user", value = "筛选条件", required = false ,dataType = "com.puyan.shengren.agricultural.enity.User"),
             @ApiImplicitParam(name = "page", value = "分页 - 第几页", required = true ,dataType = "Integer"),
             @ApiImplicitParam(name = "count", value = "分页 - 一页几条数据", required = true ,dataType = "Integer"),
     })

@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
      * @Description  通过ID查询个人信息
      * @Date  2020/7/21 18:21
      * @Param * @param id:
-     * @return * @return: com.puyan.shengren.agricultural.Enity.User
+     * @return * @return: com.puyan.shengren.agricultural.enity.User
      * 返回查询到的对象
      **/
     @Override

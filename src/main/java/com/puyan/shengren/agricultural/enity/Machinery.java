@@ -28,7 +28,7 @@ public class Machinery {
     private Double machineryWidth;
     @ApiModelProperty(value = "农机状态  1正常   2损坏  3维修  4报废删除")
     private Integer machineryStatus;
-    @ApiModelProperty(value = "持有者对象",dataType = "com.puyan.shengren.agricultural.Enity.User")
+    @ApiModelProperty(value = "持有者对象",dataType = "com.puyan.shengren.agricultural.enity.User")
     private User user;
 
     public Machinery(Integer machineryID, Integer machineryOwner, String machineryNO, String machineryIMEI, String machineryLicense, String machineryBrand, Double machineryWidth, Integer machineryStatus, User user) {
