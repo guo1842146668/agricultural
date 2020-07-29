@@ -11,5 +11,8 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+logging:
+  config: classpath:logback-boot.xml
+
 
 RequestIp : http://localhost:8080

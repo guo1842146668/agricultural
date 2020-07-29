@@ -101,6 +101,7 @@ public class WorkController {
             @ApiImplicitParam(name = "file", value = "文件流对象,接收数组格式", required = true,dataType = "MultipartFile",allowMultiple = true),
             @ApiImplicitParam(name = "workID", value = "需要归属于那一条记录的ID", required = true, dataType = "Integer", paramType = "query")
     })
+
     @PostMapping(value="/uploadImgs")
     @ResponseBody
     public Result uploadImgs( @RequestParam(value="file") MultipartFile[] files,Integer workID){

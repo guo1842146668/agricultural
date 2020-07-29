@@ -8,6 +8,7 @@ import com.puyan.shengren.agricultural.enity.Machinery;
 import com.puyan.shengren.agricultural.enity.Work;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigInteger;
@@ -108,8 +109,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                 jsonObject=new JSONObject(forObject);
                 code =jsonObject.get("code");
                 if(!code.toString().equals("200")){
-                    //如果插入失败程序将停止
-                    int a =10/0;
+                    //借用空异常向控制台警告
+                    Assert.notNull(null,"Machinery类插入失败");
                 }
             }else{
                 Work work=new Work();
@@ -122,8 +123,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                 jsonObject=new JSONObject(forObject);
                 code =jsonObject.get("code");
                 if(!code.toString().equals("200")){
-                    //如果插入失败程序将停止
-                    int a =10/0;
+                    //借用空异常向控制台警告
+                    Assert.notNull(null,"Work类插入失败");
                 }
             }
         }
