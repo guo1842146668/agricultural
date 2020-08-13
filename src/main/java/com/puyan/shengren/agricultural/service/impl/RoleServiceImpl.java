@@ -9,6 +9,8 @@ import com.puyan.shengren.agricultural.common.ResultUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: RoleServiceImpl
@@ -117,6 +119,19 @@ public class RoleServiceImpl implements RoleService {
             return ResultUtil.success();
         }
         return ResultUtil.error(500,"functiondata不可为空");
+    }
+
+    @Override
+    public List<Map<String, Object>> getRoleAndFuncionByID(Integer roleID) {
+        return roleDao.getRoleAndFuncionByID(roleID);
+    }
+
+    @Override
+    public int deleteRole(Integer roleID) {
+        roleDao.deleteRole(roleID);
+        roleDao.deleteUser_role(roleID);
+        roleDao.deleteRole_function(roleID);
+        return 1;
     }
 
 

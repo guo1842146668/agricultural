@@ -83,4 +83,11 @@ public class MachineryServiceImpl implements MachineryService {
         }
         return ResultUtil.success(machineryIsEmpty);
     }
+
+    @Override
+    public int deleteMachinery(Integer machineryID) {
+        machineryDao.deleteMachinery(machineryID);
+        machineryDao.deleteWork(machineryID);
+        return 1;
+    }
 }

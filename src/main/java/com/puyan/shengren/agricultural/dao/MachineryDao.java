@@ -24,4 +24,8 @@ public interface MachineryDao {
     List<Machinery> getAll(Machinery Machinery);
 
     Machinery getMachineryIsEmpty(String machineryNO);
+
+    int deleteMachinery(Integer machineryID);
+
+    int deleteWork(Integer machineryID);
 }

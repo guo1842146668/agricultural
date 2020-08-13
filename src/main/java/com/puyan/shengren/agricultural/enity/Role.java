@@ -4,7 +4,8 @@ package com.puyan.shengren.agricultural.enity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
 
 /**
  * @ClassName: Role  //角色表agricultural_role
@@ -20,11 +21,11 @@ public class Role {
     @ApiModelProperty(value = "角色名称")
     private String roleName;
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createDate;
+    private Date createDate;
     @ApiModelProperty(value = "创建人")
     private Integer creator;
     @ApiModelProperty(value = "修改时间")
-    private LocalDateTime updateDate;
+    private Date updateDate;
     @ApiModelProperty(value = "修改人")
     private Integer updator;
     @ApiModelProperty(value = "状态 1正常    -1禁用")
@@ -32,7 +33,7 @@ public class Role {
     @ApiModelProperty(value = "备注")
     private String remark;
 
-    public Role(Integer roleID, String roleName, LocalDateTime createDate, Integer creator, LocalDateTime updateDate, Integer updator, Integer status, String remark) {
+    public Role(Integer roleID, String roleName, Date createDate, Integer creator, Date updateDate, Integer updator, Integer status, String remark) {
         this.roleID = roleID;
         this.roleName = roleName;
         this.createDate = createDate;
@@ -62,11 +63,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public LocalDateTime getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
@@ -78,11 +79,11 @@ public class Role {
         this.creator = creator;
     }
 
-    public LocalDateTime getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(LocalDateTime updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -29,4 +30,11 @@ public interface RoleDao {
 
     int insertRoleUser(Integer userID,Integer roleID);
 
+    List<Map<String,Object>> getRoleAndFuncionByID(Integer roleID);
+
+    int deleteRole(Integer roleID);
+
+    int deleteUser_role(Integer roleID);
+
+    int deleteRole_function(Integer roleID);
 }

@@ -3,6 +3,9 @@ import com.puyan.shengren.agricultural.enity.Role;
 import com.puyan.shengren.agricultural.common.Result;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ClassName: RoleService
  * @Description: TODO
@@ -21,4 +24,8 @@ public interface RoleService {
     Result updateStatus(@Param("roleID") Integer roleID, @Param("status") Integer status);
 
     Result allotRole(@Param("roleID") String roleID, @Param("roleID") Integer userID);
+
+    List<Map<String,Object>> getRoleAndFuncionByID(Integer roleID);
+
+    int deleteRole(Integer roleID);
 }

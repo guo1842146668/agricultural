@@ -2,6 +2,7 @@ package com.puyan.shengren.agricultural.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +15,13 @@ import java.util.Map;
  **/
 @Mapper
 public interface StatDao {
-    List<Map<String,Object>> getAllByCounty();
+    List<Map<String,Object>> getAllByCounty(HashMap map);
 
     List<Map<String,Object>> getAllByMachineryID();
 
     List<Map<String,Object>> getStatsWookNum();
 
     List<Map<String,Object>> getPastSeven();
+
+    List<Map<String,Object>> getDecember(String time);
 }

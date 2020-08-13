@@ -2,6 +2,10 @@ package com.puyan.shengren.agricultural.service;
 
 import com.puyan.shengren.agricultural.common.Result;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ClassName: StatService
  * @Description: TODO
@@ -11,11 +15,13 @@ import com.puyan.shengren.agricultural.common.Result;
  **/
 public interface StatService {
 
-    Result getAllByCounty(Integer page,Integer count);
+    Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime, Date workEndTime);
 
     Result getAllByMachineryID(Integer page,Integer count);
 
     Result getStatsWookNum();
 
     Result getPastSeven();
+
+    Result getDecember(String time);
 }

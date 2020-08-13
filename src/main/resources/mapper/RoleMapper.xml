@@ -9,9 +9,9 @@
         <constructor >
             <idArg column="roleID" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="roleName" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="createDate" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
+            <arg column="createDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
             <arg column="creator" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="updateDate" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
+            <arg column="updateDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
             <arg column="updator" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -81,4 +81,23 @@
     <insert id="insertRoleUser" parameterType="map">
         insert into agricultural_user_role(userID,roleID) value (#{userID},#{roleID})
     </insert>
+
+    <select id="getRoleAndFuncionByID" parameterType="java.lang.Integer" resultType="map">
+        select r.roleID,r.roleName,r.createDate,r.creator,r.updateDate,r.updator,r.status,r.remark,f.functionID,
+        f.functionName,f.linkedUrl,f.parentID,f.orderNum,f.status as fstatus
+         from agricultural_role r, agricultural_function f,agricultural_role_function rf
+        WHERE r.roleID=rf.roleID and f.functionID=rf.functionID  and r.status > 0
+        and r.roleID=#{roleID}
+    </select>
+
+
+    <delete id="deleteRole" parameterType="Integer">
+        DELETE from agricultural_role where roleID=#{roleID} ;
+    </delete>
+    <delete id="deleteUser_role" parameterType="Integer">
+        DELETE from agricultural_user_role where roleID=#{roleID} ;
+    </delete>
+    <delete id="deleteRole_function" parameterType="Integer">
+        DELETE from agricultural_role_function where roleID=#{roleID} ;
+    </delete>
 </mapper>

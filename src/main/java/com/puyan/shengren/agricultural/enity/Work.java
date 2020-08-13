@@ -3,7 +3,7 @@ package com.puyan.shengren.agricultural.enity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @ClassName: Work //作业表  agricultural_work
@@ -14,42 +14,61 @@ import java.time.LocalDateTime;
  **/
 @ApiModel(value="Work对象",description="作业对象Work")
 public class Work {
-    @ApiModelProperty(value = "作业ID",hidden = true)
+    @ApiModelProperty(value = "作业ID", hidden = true)
     private Integer workID;
+
     @ApiModelProperty(value = "作业的机械ID")
     private Integer workMachineryID;
+
     @ApiModelProperty(value = "作业开始时间")
-    private LocalDateTime workStartTime;
+    private Date workStartTime;
+
     @ApiModelProperty(value = "作业开始坐标")
     private String workStartMap;
+
     @ApiModelProperty(value = "作业结束时间")
-    private LocalDateTime workEndTime;
+    private Date workEndTime;
+
     @ApiModelProperty(value = "作业结束坐标")
     private String workEndMap;
+
     @ApiModelProperty(value = "行驶里程")
     private Double drivenDistance;
+
     @ApiModelProperty(value = "作业里程")
     private Double workLength;
+
     @ApiModelProperty(value = "作业面积")
     private Double workArea;
+
     @ApiModelProperty(value = "作业深度")
     private Double workDepth;
+
     @ApiModelProperty(value = "核对结果 1通过   -1不通过")
     private Integer verificationResults;
+
+    @ApiModelProperty(value = "确认面积")
+    private Double confirmArea;
+
     @ApiModelProperty(value = "省")
     private String province;
+
     @ApiModelProperty(value = "市")
     private String city;
+
     @ApiModelProperty(value = "县")
     private String county;
+
     @ApiModelProperty(value = "镇")
     private String town;
+
     @ApiModelProperty(value = "村")
     private String village;
+
     @ApiModelProperty(value = "作业机械对象")
     private Machinery machinery;
 
-    public Work(Integer workID, Integer workMachineryID, LocalDateTime workStartTime, String workStartMap, LocalDateTime workEndTime, String workEndMap, Double drivenDistance, Double workLength, Double workArea, Double workDepth, Integer verificationResults, String province, String city, String county, String town, String village, Machinery machinery) {
+    public Work(Integer workID, Integer workMachineryID, Date workStartTime, String workStartMap, Date workEndTime, String workEndMap, Double drivenDistance, Double workLength, Double workArea, Double workDepth, Integer verificationResults, Double confirmArea, String province, String city, String county, String town, String village, Machinery machinery) {
         this.workID = workID;
         this.workMachineryID = workMachineryID;
         this.workStartTime = workStartTime;
@@ -61,6 +80,7 @@ public class Work {
         this.workArea = workArea;
         this.workDepth = workDepth;
         this.verificationResults = verificationResults;
+        this.confirmArea = confirmArea;
         this.province = province;
         this.city = city;
         this.county = county;
@@ -88,11 +108,11 @@ public class Work {
         this.workMachineryID = workMachineryID;
     }
 
-    public LocalDateTime getWorkStartTime() {
+    public Date getWorkStartTime() {
         return workStartTime;
     }
 
-    public void setWorkStartTime(LocalDateTime workStartTime) {
+    public void setWorkStartTime(Date workStartTime) {
         this.workStartTime = workStartTime;
     }
 
@@ -104,11 +124,11 @@ public class Work {
         this.workStartMap = workStartMap;
     }
 
-    public LocalDateTime getWorkEndTime() {
+    public Date getWorkEndTime() {
         return workEndTime;
     }
 
-    public void setWorkEndTime(LocalDateTime workEndTime) {
+    public void setWorkEndTime(Date workEndTime) {
         this.workEndTime = workEndTime;
     }
 
@@ -158,6 +178,14 @@ public class Work {
 
     public void setVerificationResults(Integer verificationResults) {
         this.verificationResults = verificationResults;
+    }
+
+    public Double getConfirmArea() {
+        return confirmArea;
+    }
+
+    public void setConfirmArea(Double confirmArea) {
+        this.confirmArea = confirmArea;
     }
 
     public String getProvince() {

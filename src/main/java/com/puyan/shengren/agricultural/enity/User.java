@@ -3,7 +3,7 @@ package com.puyan.shengren.agricultural.enity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @ClassName: User   //用户表  agricultural_user
@@ -29,13 +29,13 @@ public class User {
     @ApiModelProperty(value = "用户状态 1正常    -1禁用")
     private Integer status;
     @ApiModelProperty(value = "上一次登录时间")
-    private LocalDateTime lastLoginTime;
+    private Date lastLoginTime;
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createDate;
+    private Date createDate;
     @ApiModelProperty(value = "创建人")
     private Integer creator;
     @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateDate;
+    private Date updateDate;
     @ApiModelProperty(value = "更新人")
     private Integer updator;
     @ApiModelProperty(value = "省")
@@ -51,7 +51,7 @@ public class User {
     @ApiModelProperty(value = "合作社")
     private String cooperative;
 
-    public User(Integer userID, String userName, String passWord, String phone, String email, Integer type, Integer status, LocalDateTime lastLoginTime, LocalDateTime createDate, Integer creator, LocalDateTime updateDate, Integer updator, String province, String city, String county, String town, String village, String cooperative) {
+    public User(Integer userID, String userName, String passWord, String phone, String email, Integer type, Integer status, Date lastLoginTime, Date createDate, Integer creator, Date updateDate, Integer updator, String province, String city, String county, String town, String village, String cooperative) {
         this.userID = userID;
         this.userName = userName;
         this.passWord = passWord;
@@ -131,19 +131,19 @@ public class User {
         this.status = status;
     }
 
-    public LocalDateTime getLastLoginTime() {
+    public Date getLastLoginTime() {
         return lastLoginTime;
     }
 
-    public void setLastLoginTime(LocalDateTime lastLoginTime) {
+    public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public LocalDateTime getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
@@ -155,11 +155,11 @@ public class User {
         this.creator = creator;
     }
 
-    public LocalDateTime getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(LocalDateTime updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 

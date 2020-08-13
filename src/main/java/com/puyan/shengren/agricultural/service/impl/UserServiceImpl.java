@@ -163,12 +163,12 @@ public class UserServiceImpl implements UserService {
      **/
     @Override
     public Result getAll(User user,Integer page,Integer count) {
+        //开启分页
+        PageHelper.startPage(page,count);
         List<User> userAll = userDao.getAll(user);
         if(userAll.isEmpty()){
             return ResultUtil.success(userAll);
         }
-        //开启分页
-        PageHelper.startPage(page,count);
         //创建分页对象
         PageInfo<User> pageInfo=new PageInfo<>(userAll);
         //分页封装返回
@@ -190,6 +190,11 @@ public class UserServiceImpl implements UserService {
             return  ResultUtil.error(400,"更新失败");
         }
         return ResultUtil.success();
+    }
+
+    @Override
+    public Result verificationResults() {
+        return ResultUtil.success(userDao.verificationResults());
     }
 
 }

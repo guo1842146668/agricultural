@@ -21,4 +21,6 @@ public interface MachineryService {
     Result getAll(Machinery Machinery,Integer page,Integer count);
 
     Result getMachineryIsEmpty(String machineryNO);
+
+    int deleteMachinery(Integer machineryID);
 }

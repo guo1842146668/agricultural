@@ -75,6 +75,9 @@
     <select id="getAll" parameterType="Machinery" resultMap="BaseResultMap">
         select * from agricultural_machinery m,agricultural_user u where m.machineryOwner=u.userID
         <if test="user!=null">
+            <if test="user.userID !=null">
+                and u.userID = #{user.userID}
+            </if>
             <if test="user.userName !=null">
                 and u.userName = #{user.userName}
             </if>
@@ -119,4 +122,12 @@
         SELECT m.*,u.* from agricultural_machinery m LEFT JOIN agricultural_user u
         on  m.machineryOwner=u.userID where m.machineryNO=#{machineryNO}
     </select>
+
+
+    <delete id="deleteMachinery" parameterType="Integer">
+        DELETE from agricultural_machinery where machineryID=#{machineryID}
+    </delete>
+    <delete id="deleteWork" parameterType="Integer">
+        DELETE from agricultural_work where workMachineryID=#{machineryID}
+    </delete>
 </mapper>

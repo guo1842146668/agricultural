@@ -5,6 +5,8 @@ import com.puyan.shengren.agricultural.common.Result;
 import com.puyan.shengren.agricultural.common.ServerResponse;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -29,4 +31,6 @@ public interface UserService {
     Result getAll(User user,Integer page,Integer count);
 
     Result updateStatus(@Param("userID") Integer userID,@Param("status") Integer status);
+
+    Result verificationResults();
 }

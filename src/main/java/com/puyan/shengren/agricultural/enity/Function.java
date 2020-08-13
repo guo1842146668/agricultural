@@ -25,6 +25,14 @@ public class Function {
     @ApiModelProperty(value = "方法是否可用")
     private Integer status;
 
+    public Function(Integer functionID, String functionName, String linkedUrl, Integer parentID, Integer orderNum, Integer status) {
+        this.functionID = functionID;
+        this.functionName = functionName;
+        this.linkedUrl = linkedUrl;
+        this.parentID = parentID;
+        this.orderNum = orderNum;
+        this.status = status;
+    }
 
     public Function() {
     }

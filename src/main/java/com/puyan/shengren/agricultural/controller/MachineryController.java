@@ -1,5 +1,6 @@
 package com.puyan.shengren.agricultural.controller;
 
+import com.puyan.shengren.agricultural.common.ResultUtil;
 import com.puyan.shengren.agricultural.enity.Machinery;
 import com.puyan.shengren.agricultural.service.MachineryService;
 import com.puyan.shengren.agricultural.common.Result;
@@ -38,7 +39,7 @@ public class MachineryController {
     })
     @PostMapping("/machineryInsert")
     @ResponseBody
-    public Result insert(@RequestBody Machinery machinery){
+    public Result insert(Machinery machinery){
         return  machineryService.insert(machinery);
     }
 
@@ -95,7 +96,7 @@ public class MachineryController {
     })
     @GetMapping("/getAll")
     @ResponseBody
-    public Result getAll(@RequestBody Machinery Machinery, Integer page, Integer count){
+    public Result getAll(Machinery Machinery, Integer page, Integer count){
         return machineryService.getAll(Machinery, page, count);
     }
 
@@ -104,5 +105,11 @@ public class MachineryController {
     @ResponseBody
     public Result getMachineryIsEmpty(String machineryNO){
         return machineryService.getMachineryIsEmpty(machineryNO);
+    }
+
+
+    @DeleteMapping("/delete")
+    public Result deleteWork(Integer machineryID){
+        return ResultUtil.success(machineryService.deleteMachinery(machineryID));
     }
 }

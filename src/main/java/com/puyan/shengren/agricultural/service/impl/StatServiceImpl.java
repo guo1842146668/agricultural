@@ -1,5 +1,6 @@
 package com.puyan.shengren.agricultural.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.puyan.shengren.agricultural.dao.StatDao;
@@ -9,6 +10,8 @@ import com.puyan.shengren.agricultural.common.ResultUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,9 +29,13 @@ public class StatServiceImpl implements StatService {
 
 
     @Override
-    public Result getAllByCounty(Integer page,Integer count) {
+    public Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime,Date workEndTime) {
         PageHelper.startPage(page,count);
-        List<Map<String, Object>> allByCounty = statDao.getAllByCounty();
+        HashMap hashMap=new HashMap();
+        hashMap.put("checkID",checkID);
+        hashMap.put("workStartTime",workStartTime);
+        hashMap.put("workEndTime",workEndTime);
+        List<Map<String, Object>> allByCounty = statDao.getAllByCounty(hashMap);
         if(allByCounty.isEmpty()){
             return ResultUtil.success(null);
         }
@@ -55,5 +62,13 @@ public class StatServiceImpl implements StatService {
     @Override
     public Result getPastSeven() {
         return ResultUtil.success(statDao.getPastSeven());
+    }
+
+    @Override
+    public Result getDecember(String time) {
+        if(StrUtil.hasBlank(time)  || time.equals("")){
+            return ResultUtil.success(statDao.getDecember(null));
+        }
+        return ResultUtil.success(statDao.getDecember(time));
     }
 }

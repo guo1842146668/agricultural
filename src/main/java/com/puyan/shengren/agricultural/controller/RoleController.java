@@ -1,5 +1,6 @@
 package com.puyan.shengren.agricultural.controller;
 
+import com.puyan.shengren.agricultural.common.ResultUtil;
 import com.puyan.shengren.agricultural.enity.Role;
 import com.puyan.shengren.agricultural.service.RoleService;
 import com.puyan.shengren.agricultural.common.Result;
@@ -115,4 +116,24 @@ public class RoleController {
     public Result allotRole(@Param("roleID") String roleID, @Param("roleID") Integer userID){
         return  roleService.allotRole(roleID,userID);
     }
+
+
+    @ApiOperation(value="根据角色ID查询添加的方法", notes="根据角色ID查询添加的方法接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "roleID", value = "角色ID", required = true ,dataType = "String")
+    })
+    @GetMapping("/getRoleByID")
+    @ResponseBody
+    public Result getRoleAndFuncionByID(@Param("roleID") Integer roleID){
+        return ResultUtil.success(roleService.getRoleAndFuncionByID(roleID));
+    }
+
+    @DeleteMapping("/delete")
+    public Result deleteRole(Integer roleID){
+        if(roleID == null){
+            return ResultUtil.error(500,"参数错误");
+        }
+        return  ResultUtil.success(roleService.deleteRole(roleID));
+    }
+
 }

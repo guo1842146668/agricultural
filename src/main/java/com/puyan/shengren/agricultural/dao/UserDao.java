@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: UserDao
@@ -29,4 +30,6 @@ public interface UserDao {
         List<User> getAll(User user);
 
         int updateStatus(@Param("userID") Integer userID,@Param("status") Integer status);
+
+        List<Map<String,Object>> verificationResults();
 }

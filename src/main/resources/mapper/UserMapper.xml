@@ -148,4 +148,7 @@
         update  agricultural_user set status=#{status,jdbcType=INTEGER} where userID=#{userID,jdbcType=INTEGER}
     </update>
 
+    <select id="verificationResults" resultType="map">
+        select cooperative,city,county,town,village from agricultural_user
+    </select>
 </mapper>

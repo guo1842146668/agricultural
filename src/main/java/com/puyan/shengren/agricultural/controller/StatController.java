@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @ClassName: StatController
@@ -43,8 +44,8 @@ public class StatController {
     })
     @GetMapping("/getAllByCounty")
     @ResponseBody
-    public Result getAllByCounty(Integer page, Integer count){
-        return statService.getAllByCounty(page, count);
+    public Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime, Date workEndTime){
+        return statService.getAllByCounty(page, count,checkID,workStartTime,workEndTime);
     }
 
     /**
@@ -91,7 +92,22 @@ public class StatController {
     @GetMapping("/getPastSeven")
     @ResponseBody
     public Result getPastSeven() {
-        Result pastSeven = statService.getPastSeven();
         return ResultUtil.success(statService.getPastSeven());
     }
+
+
+    /**
+     * @Author guoyangyang
+     * @Description  统计过去7天的作业面积
+     * @Date  2020/7/24 11:24
+     * @Param
+     * @return * @return: com.puyan.shengren.agricultural.common.Result
+     **/
+    @ApiOperation(value="统计过去7天的作业面积", notes="统计过去7天的作业面积接口")
+    @GetMapping("/getDecember")
+    @ResponseBody
+    public Result getDecember(String time) {
+        return ResultUtil.success(statService.getDecember(time));
+    }
+
 }
