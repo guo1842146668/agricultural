@@ -26,6 +26,7 @@ import java.util.Map;
  * @Version: 1.0
  **/
 @Api(value = "UserController", description = "用户操作控制类")
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {

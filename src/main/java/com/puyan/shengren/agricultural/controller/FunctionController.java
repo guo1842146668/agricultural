@@ -19,6 +19,7 @@ import javax.annotation.Resource;
  * @Version: 1.0
  **/
 @Api(value = "FunctionController", description = "方法操作控制类")
+@CrossOrigin
 @RestController
 @RequestMapping("/function")
 public class FunctionController {

@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -111,5 +112,16 @@ public class WorkServiceImpl implements WorkService {
         }
 
         return ResultUtil.success(resultFile);
+    }
+
+    @Override
+    public List<Map<String, Object>> upExcel(Work work, Integer page, Integer count) {
+        PageHelper.startPage(page,count);
+        List<Map<String, Object>> maps = workDao.upExcel(work);
+        if(maps.isEmpty()){
+            return  null;
+        }
+        PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(maps);
+        return pageInfo.getList();
     }
 }

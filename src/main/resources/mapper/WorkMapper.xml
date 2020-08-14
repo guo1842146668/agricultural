@@ -134,6 +134,9 @@
                 <if test="machinery.machineryNO !=null">
                     and m.machineryNO=#{machinery.machineryNO}
                 </if>
+                <if test="machinery.machineryOwner !=null">
+                    and m.machineryOwner=#{machinery.machineryOwner}
+                </if>
                 <if test="machinery.user!=null">
                     <if test="machinery.user.userID !=null">
                         and u.userID=#{machinery.user.userID}
@@ -172,5 +175,66 @@
         </if>
     </select>
 
-
+    <select id="upExcel" parameterType="com.puyan.shengren.agricultural.enity.Work"  resultType="map">
+        SELECT w.*,m.*,u.* from agricultural_work w,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and m.machineryOwner=u.userID
+        <if test="workMachineryID !=null">
+            and w.workMachineryID = #{workMachineryID}
+        </if>
+        <if test="workStartTime !=null">
+            and w.workStartTime &gt;= #{workStartTime}
+        </if>
+        <if test="workEndTime !=null">
+            and w.workEndTime &lt;= #{workEndTime}
+        </if>
+        <if test="verificationResults !=null">
+            and w.verificationResults = #{verificationResults}
+        </if>
+        <if test="machinery !=null">
+            <if test="machinery.machineryLicense !=null">
+                and m.machineryLicense=#{machinery.machineryLicense}
+            </if>
+            <if test="machinery.machineryNO !=null">
+                and m.machineryNO=#{machinery.machineryNO}
+            </if>
+            <if test="machinery.machineryOwner !=null">
+                and m.machineryOwner=#{machinery.machineryOwner}
+            </if>
+            <if test="machinery.user!=null">
+                <if test="machinery.user.userID !=null">
+                    and u.userID=#{machinery.user.userID}
+                </if>
+                <if test="machinery.user.userName !=null">
+                    and u.userName=#{machinery.user.userName}
+                </if>
+                <if test="machinery.user.phone !=null">
+                    and u.phone=#{machinery.user.phone}
+                </if>
+                <if test="machinery.user.email !=null">
+                    and u.email=#{machinery.user.email}
+                </if>
+                <if test="machinery.user.province !=null">
+                    and u.province=#{machinery.user.province}
+                </if>
+                <if test="machinery.user.city !=null">
+                    and u.city=#{machinery.user.city}
+                </if>
+                <if test="machinery.user.county !=null">
+                    and u.county=#{machinery.user.county}
+                </if>
+                <if test="machinery.user.town !=null">
+                    and u.town=#{machinery.user.town}
+                </if>
+                <if test="machinery.user.village !=null">
+                    and u.village=#{machinery.user.village}
+                </if>
+                <if test="machinery.user.cooperative !=null">
+                    and u.cooperative=#{machinery.user.cooperative}
+                </if>
+            </if>
+        </if>
+        <if test="workID !=null">
+            and w.workID = #{workID}
+        </if>
+    </select>
 </mapper>

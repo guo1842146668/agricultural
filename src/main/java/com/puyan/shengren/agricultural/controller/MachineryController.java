@@ -20,6 +20,7 @@ import javax.annotation.Resource;
  * @Version: 1.0
  **/
 @Api(value = "/machinery", description = "农业机械操作类")
+@CrossOrigin
 @RestController
 @RequestMapping("/machinery")
 public class MachineryController {

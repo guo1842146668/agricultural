@@ -1,13 +1,22 @@
 package com.puyan.shengren.agricultural.controller;
 
+import com.puyan.shengren.agricultural.common.ResultUtil;
 import com.puyan.shengren.agricultural.enity.Work;
 import com.puyan.shengren.agricultural.service.WorkService;
 import com.puyan.shengren.agricultural.common.Result;
+import com.puyan.shengren.agricultural.tool.ExprotExcel;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -18,6 +27,7 @@ import javax.annotation.Resource;
  * @Version: 1.0
  **/
 @Api(value = "WorkController", description = "作业信息控制类")
+@CrossOrigin
 @RestController
 @RequestMapping("/work")
 public class WorkController {
@@ -37,7 +47,7 @@ public class WorkController {
     })
     @PostMapping("/work_insert")
     @ResponseBody
-    public Result insert(@RequestBody Work work){
+    public Result insert(Work work){
         return  workService.insert(work);
     }
 
@@ -109,6 +119,31 @@ public class WorkController {
       return  workService.uploadImgs(files, workID);
     }
 
+    @GetMapping("/uplodExcel")
+    @ResponseBody
+    public Result uplodExcel(Work work, Integer page, Integer count,HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
+        Map<String,Object> biaotoulsit=new HashMap<>();
+        biaotoulsit.put("序号","1");
+        biaotoulsit.put("用户名","userName");
+        biaotoulsit.put("所属区域/省","province");
+        biaotoulsit.put("所属区域/市","city");
+        biaotoulsit.put("所属区域/县","county");
+        biaotoulsit.put("所属区域/镇","town");
+        biaotoulsit.put("所属区域/村","village");
+        biaotoulsit.put("所属区域/合作社","cooperative");
+        biaotoulsit.put("车辆编号","machineryNO");
+        biaotoulsit.put("农机名称","machineryBrand");
+        biaotoulsit.put("车宽","machineryWidth");
+        biaotoulsit.put("车主电话","phone");
+        biaotoulsit.put("核对面积","confirmArea");
+        biaotoulsit.put("作业开始时间","workStartTime");
+        biaotoulsit.put("作业结束时间","workEndTime");
+        biaotoulsit.put("作业面积","workArea");
+        biaotoulsit.put("作业长度","workLength");
+        List<Map<String, Object>> maps = workService.upExcel(work, page, count);
+        ExprotExcel.exportAll(maps,biaotoulsit,request,response);
+        return ResultUtil.success();
+    }
 
 
 }

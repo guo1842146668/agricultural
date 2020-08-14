@@ -4,6 +4,7 @@ import com.puyan.shengren.agricultural.enity.Work;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: WorkDao
@@ -24,4 +25,6 @@ public interface WorkDao {
     //List<Map<String,Object>> getAll(Map<String,Object> map);
 
     List<Work> getAll(Work work);
+
+    List<Map<String,Object>> upExcel(Work work);
 }

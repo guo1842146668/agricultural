@@ -5,6 +5,9 @@ import com.puyan.shengren.agricultural.common.Result;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ClassName: WorkService
  * @Description: TODO
@@ -23,4 +26,6 @@ public interface WorkService {
     Result getAll(Work work,Integer page,Integer count);
 
     Result uploadImgs(@RequestParam("file") MultipartFile[] files, Integer workID);
+
+    List<Map<String,Object>> upExcel(Work work,Integer page,Integer count);
 }
