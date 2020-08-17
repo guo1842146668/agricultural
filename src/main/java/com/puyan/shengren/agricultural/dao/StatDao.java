@@ -1,5 +1,6 @@
 package com.puyan.shengren.agricultural.dao;
 
+import com.puyan.shengren.agricultural.common.Result;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
@@ -24,4 +25,12 @@ public interface StatDao {
     List<Map<String,Object>> getPastSeven();
 
     List<Map<String,Object>> getDecember(String time);
+
+    List<Map<String,Object>> getWorkBycounty(String  county);
+
+    List<Map<String,Object>> getWorkByNo(String  machineryNO);
+
+    List<Map<String,Object>> getWorkByvillage(Integer  workID);
+
+    List<Map<String,Object>> getWorkByName(Integer  userID);
 }

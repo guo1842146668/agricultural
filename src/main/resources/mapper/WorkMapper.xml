@@ -52,7 +52,7 @@
             </collection>
         </collection>
     </resultMap>
-    <insert id="insert" parameterType="com.puyan.shengren.agricultural.enity.Work">
+    <insert id="insert" parameterType="com.puyan.shengren.agricultural.enity.Work" useGeneratedKeys="true" keyProperty="workID">
         insert into agricultural_work(workMachineryID,workStartTime,workStartMap,workEndTime,workEndMap,drivenDistance,workLength,
         workArea,workDepth,verificationResults,confirmArea,province,city,county,town,village)
         value (#{workMachineryID},now(),#{workStartMap},#{workEndTime},#{workEndMap},#{drivenDistance},#{workLength},
@@ -237,4 +237,9 @@
             and w.workID = #{workID}
         </if>
     </select>
+
+    <select id="getByWorkID" parameterType="Integer" resultMap="BaseResultMap">
+        select *  from agricultural_work where workStartTime &lt; (select workStartTime from agricultural_work where workID = #{workID}) ORDER BY workStartTime DESC LIMIT 1
+    </select>
+
 </mapper>

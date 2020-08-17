@@ -28,4 +28,6 @@ public interface MachineryDao {
     int deleteMachinery(Integer machineryID);
 
     int deleteWork(Integer machineryID);
+
+    Machinery getMachineryByID(Integer  machineryID);
 }

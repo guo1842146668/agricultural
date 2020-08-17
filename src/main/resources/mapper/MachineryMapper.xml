@@ -130,4 +130,8 @@
     <delete id="deleteWork" parameterType="Integer">
         DELETE from agricultural_work where workMachineryID=#{machineryID}
     </delete>
+
+    <select id="getMachineryByID" parameterType="Integer" resultMap="BaseResultMap">
+        select  * from agricultural_machinery where machineryID = #{machineryID}
+    </select>
 </mapper>

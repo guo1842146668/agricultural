@@ -100,5 +100,34 @@
     </select>
 
 
+    <select id="getWorkBycounty" parameterType="String" resultType="map">
+        SELECT workID,village,SUM(workArea) as workArea,SUM(workLength) as workLength,SUM(confirmArea) as  confirmArea
+        from agricultural_work where county = #{county} GROUP BY village
+    </select>
 
+    <select id="getWorkByNo" parameterType="String" resultType="map">
+        SELECT
+        (SELECT machineryOwner from agricultural_machinery  where machineryID = workMachineryID ) as userID,
+        (select userName from agricultural_user where userID in (SELECT machineryOwner from agricultural_machinery  where machineryID = workMachineryID )) as name,SUM(workArea) as workArea,SUM(workLength) as workLength,SUM(confirmArea) as confirmArea from agricultural_work where workMachineryID in
+        (SELECT machineryID from agricultural_machinery where machineryNO=#{machineryNO})  GROUP BY workMachineryID
+    </select>
+
+    <select id="getWorkByvillage" parameterType="Integer" resultType="map">
+        SELECT *,
+        (select userName from agricultural_user where userID in (SELECT machineryOwner from agricultural_machinery  where machineryID = workMachineryID )) as userName,
+		(select phone from agricultural_user where userID in (SELECT machineryOwner from agricultural_machinery  where machineryID = workMachineryID )) as phone
+		from agricultural_work where
+        province=(SELECT province from agricultural_work where 	workID = #{workID} ) and
+        city=(SELECT city from agricultural_work where 	workID = #{workID}) and
+        county=(SELECT county from agricultural_work where 	workID = #{workID}) and
+        town=(SELECT town from agricultural_work where 	workID = #{workID}) and
+        village=(SELECT village from agricultural_work where 	workID = #{workID})
+    </select>
+
+    <select id="getWorkByName" parameterType="Integer" resultType="map">
+        SELECT *,
+         (select userName from agricultural_user where userID in (SELECT machineryOwner from agricultural_machinery  where machineryID = workMachineryID )) as userName,
+		(select phone from agricultural_user where userID in (SELECT machineryOwner from agricultural_machinery  where machineryID = workMachineryID )) as phone
+		 from agricultural_work where workMachineryID IN (SELECT machineryID from agricultural_machinery where machineryOwner = #{userID})
+    </select>
 </mapper>

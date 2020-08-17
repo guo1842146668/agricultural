@@ -105,7 +105,26 @@ public class StatController {
     @GetMapping("/getDecember")
     @ResponseBody
     public Result getDecember(String time) {
-        return ResultUtil.success(statService.getDecember(time));
+        return statService.getDecember(time);
     }
 
+    @GetMapping("/getWorkBycounty")
+    public Result getWorkBycounty(String county){
+        return statService.getWorkBycounty(county);
+    }
+
+    @GetMapping("/getWorkByNo")
+    public Result getWorkByNo(String machineryNO){
+        return statService.getWorkByNo(machineryNO);
+    }
+
+    @GetMapping("/getWorkByvillage")
+    public Result getWorkByvillage(Integer  workID){
+        return statService.getWorkByvillage(workID);
+    }
+
+    @GetMapping("/getWorkByName")
+    public Result getWorkByName(Integer  userID){
+        return  statService.getWorkByName(userID);
+    }
 }

@@ -96,7 +96,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
         //创建实现类对象
 
         RestTemplate restTemplate=new RestTemplate();
-        String forObject = restTemplate.getForObject("http://localhost:8080/machinery/getMachineryIsEmpty?machineryNO=" + "060047295267", String.class);
+        String forObject = restTemplate.getForObject("http://localhost:8080/machinery/getMachineryIsEmpty?machineryNO=" + equipmentNumber, String.class);
         JSONObject jsonObject=new JSONObject(forObject);
         Object code = jsonObject.get("code");
         Object data = jsonObject.get("data");

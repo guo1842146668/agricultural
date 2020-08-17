@@ -27,4 +27,6 @@ public interface WorkDao {
     List<Work> getAll(Work work);
 
     List<Map<String,Object>> upExcel(Work work);
+
+    Work getByWorkID(Integer workID);
 }

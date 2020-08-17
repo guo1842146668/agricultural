@@ -1,5 +1,6 @@
 package com.puyan.shengren.agricultural;
 
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.puyan.shengren.agricultural.tool.CalculateUtil;
 import io.github.swagger2markup.GroupBy;
@@ -10,6 +11,7 @@ import io.github.swagger2markup.builder.Swagger2MarkupConfigBuilder;
 import io.github.swagger2markup.markup.builder.MarkupLanguage;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import sun.security.provider.MD5;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,10 +70,13 @@ class AgriculturalApplicationTests {
        return calculateUtil.getDistance(116.413384,39.910925, 112.459421,34.624263);
     }
 
-
+    static String  test5(){
+        return SecureUtil.md5("xrz0");
+    }
    public static void main(String[] args) throws MalformedURLException {
        //test1();
-        test4();
+       // test4();
+       System.out.println(test5());
     }
 
     public static void getCityFromLngAndlat()

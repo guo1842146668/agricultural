@@ -24,4 +24,12 @@ public interface StatService {
     Result getPastSeven();
 
     Result getDecember(String time);
+
+    Result getWorkBycounty(String  county);
+
+    Result getWorkByNo(String  machineryNO);
+
+    Result getWorkByvillage(Integer  workID);
+
+    Result getWorkByName(Integer  userID);
 }

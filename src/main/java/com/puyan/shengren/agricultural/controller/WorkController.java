@@ -47,7 +47,7 @@ public class WorkController {
     })
     @PostMapping("/work_insert")
     @ResponseBody
-    public Result insert(Work work){
+    public Result insert(@RequestBody Work work){
         return  workService.insert(work);
     }
 

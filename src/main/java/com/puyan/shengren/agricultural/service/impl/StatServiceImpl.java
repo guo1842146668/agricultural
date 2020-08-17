@@ -71,4 +71,24 @@ public class StatServiceImpl implements StatService {
         }
         return ResultUtil.success(statDao.getDecember(time));
     }
+
+    @Override
+    public Result getWorkBycounty(String county) {
+        return ResultUtil.success(statDao.getWorkBycounty(county));
+    }
+
+    @Override
+    public Result getWorkByNo(String machineryNO) {
+        return ResultUtil.success(statDao.getWorkByNo(machineryNO));
+    }
+
+    @Override
+    public Result getWorkByvillage(Integer  workID) {
+        return ResultUtil.success(statDao.getWorkByvillage(workID));
+    }
+
+    @Override
+    public Result getWorkByName(Integer  userID) {
+        return ResultUtil.success(statDao.getWorkByName(userID));
+    }
 }

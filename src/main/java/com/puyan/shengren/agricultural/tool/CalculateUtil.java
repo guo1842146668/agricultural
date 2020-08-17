@@ -9,9 +9,9 @@ package com.puyan.shengren.agricultural.tool;
  **/
 public class CalculateUtil {
     //地球平均半径
-    private  final double EARTH_RADIUS = 6378137;
+    private static final double EARTH_RADIUS = 6378137;
     //把经纬度转为度（°）
-    private  double rad(double d){
+    private static double rad(double d){
         return d * Math.PI / 180.0;
     }
 
@@ -23,7 +23,7 @@ public class CalculateUtil {
      * @param lat2
      * @return
      */
-    public  double getDistance(double lng1, double lat1, double lng2, double lat2){
+    public static   double getDistance(double lng1, double lat1, double lng2, double lat2){
         double radLat1 = rad(lat1);
         double radLat2 = rad(lat2);
         double a = radLat1 - radLat2;
