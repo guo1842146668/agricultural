@@ -168,6 +168,9 @@
                     <if test="machinery.user.cooperative !=null">
                         and u.cooperative=#{machinery.user.cooperative}
                     </if>
+                    <if test="machinery.user.groupID !=null">
+                        and u.groupID=#{machinery.user.groupID}
+                    </if>
                 </if>
             </if>
         <if test="workID !=null">
@@ -230,6 +233,9 @@
                 </if>
                 <if test="machinery.user.cooperative !=null">
                     and u.cooperative=#{machinery.user.cooperative}
+                </if>
+                <if test="machinery.user.groupID !=null">
+                    and u.groupID=#{machinery.user.groupID}
                 </if>
             </if>
         </if>

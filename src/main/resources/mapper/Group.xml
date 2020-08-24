@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.puyan.shengren.agricultural.dao.GroupDao">
+    <resultMap id="BaseResultMap" type="com.puyan.shengren.agricultural.enity.Group" >
+        <id column="groupID" property="groupID"/>
+        <result column="groupName" property="groupName"/>
+        <result column="groupStatus" property="groupStatus"/>
+    </resultMap>
+    <insert id="saveGroup" parameterType="String">
+        insert  into agricultural_group values(null,#{groupName},1)
+    </insert>
+
+    <select id="listGroup" resultType="com.puyan.shengren.agricultural.enity.Group">
+        select * from agricultural_group
+    </select>
+
+</mapper>

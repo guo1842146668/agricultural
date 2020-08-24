@@ -50,8 +50,13 @@ public class User {
     private String village;
     @ApiModelProperty(value = "合作社")
     private String cooperative;
+    @ApiModelProperty(value = "分组ID")
+    private Integer groupID;
 
-    public User(Integer userID, String userName, String passWord, String phone, String email, Integer type, Integer status, Date lastLoginTime, Date createDate, Integer creator, Date updateDate, Integer updator, String province, String city, String county, String town, String village, String cooperative) {
+    public User() {
+    }
+
+    public User(Integer userID, String userName, String passWord, String phone, String email, Integer type, Integer status, Date lastLoginTime, Date createDate, Integer creator, Date updateDate, Integer updator, String province, String city, String county, String town, String village, String cooperative, Integer groupID) {
         this.userID = userID;
         this.userName = userName;
         this.passWord = passWord;
@@ -70,9 +75,7 @@ public class User {
         this.town = town;
         this.village = village;
         this.cooperative = cooperative;
-    }
-
-    public User() {
+        this.groupID = groupID;
     }
 
     public Integer getUserID() {
@@ -217,5 +220,13 @@ public class User {
 
     public void setCooperative(String cooperative) {
         this.cooperative = cooperative;
+    }
+
+    public Integer getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(Integer groupID) {
+        this.groupID = groupID;
     }
 }

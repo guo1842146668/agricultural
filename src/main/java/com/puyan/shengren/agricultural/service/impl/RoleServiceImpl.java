@@ -108,15 +108,14 @@ public class RoleServiceImpl implements RoleService {
      * @return * @return: com.puyan.shengren.agricultural.common.Result
      **/
     @Override
-    public Result allotRole(String roleID, Integer userID) {
-        if(roleID.length()>0){
-            String[] array=roleID.split(",");
-            for (int i = 0; i < array.length; i++) {
-                if (roleDao.getRoleByUserID(userID,Integer.parseInt(array[i]))<1){
-                    roleDao.insertRoleUser(userID,Integer.parseInt(array[i]));
+    public Result allotRole(Integer roleID, Integer userID) {
+        if(roleID != null){
+                if (roleDao.getRoleByUserID(userID,roleID)<1){
+                    roleDao.insertRoleUser(userID,roleID);
+                    return ResultUtil.success();
                 }
-            }
-            return ResultUtil.success();
+            return ResultUtil.error(500,"该用户已经拥有角色");
+
         }
         return ResultUtil.error(500,"functiondata不可为空");
     }

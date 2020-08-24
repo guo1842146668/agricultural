@@ -23,7 +23,7 @@ public interface RoleService {
 
     Result updateStatus(@Param("roleID") Integer roleID, @Param("status") Integer status);
 
-    Result allotRole(@Param("roleID") String roleID, @Param("roleID") Integer userID);
+    Result allotRole(@Param("roleID") Integer roleID, @Param("roleID") Integer userID);
 
     List<Map<String,Object>> getRoleAndFuncionByID(Integer roleID);
 

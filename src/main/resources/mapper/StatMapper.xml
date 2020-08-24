@@ -8,101 +8,142 @@
    <select id="getAllByCounty" parameterType="HashMap" resultType="java.util.Map">
         <if test=" checkID == 2">
             select m.machineryNO,COUNT(workMachineryID) as '农机数量',SUM(workLength) as '作业里程',SUM(workArea) as '作业面积'
-            from  agricultural_work w,agricultural_machinery m where w.workMachineryID=m.machineryID
+            from  agricultural_work w,agricultural_machinery m,agricultural_user u where w.workMachineryID=m.machineryID
+            and u.userID = m.machineryOwner and u.groupID = #{groupID}
               <if test="workStartTime != null">
                   w.workStartTime &gt;= #{workStartTime}
               </if>
               <if  test="workEndTime != null">
                   w.workEndTime &lt;= #{workEndTime}
               </if>
-              GROUP BY workMachineryID
+              GROUP BY w.workMachineryID
         </if>
         <if test="checkID == 1">
-            select province,city,county,COUNT(workMachineryID) as '农机数量',SUM(workLength) as '作业里程',SUM(workArea) as '作业面积'
-            from  agricultural_work where 1=1
+            select w.province,w.city,w.county,COUNT(w.workMachineryID) as '农机数量',SUM(w.workLength) as '作业里程',SUM(w.workArea) as '作业面积'
+            from  agricultural_work w,agricultural_machinery m,agricultural_user u where w.workMachineryID=m.machineryID
+            and u.userID = m.machineryOwner and u.groupID =#{groupID}
 
             <if test="workStartTime != null">
-              and   workStartTime &gt;= #{workStartTime}
+              and   w.workStartTime &gt;= #{workStartTime}
             </if>
             <if  test="workEndTime != null">
-              and   workEndTime &lt;= #{workEndTime}
+              and   w.workEndTime &lt;= #{workEndTime}
             </if>
-            GROUP BY county
+            GROUP BY w.county
         </if>
   </select>
 
     <select id="getAllByMachineryID" resultType="java.util.Map">
         select m.machineryNO,m.machineryLicense,m.machineryBrand, COUNT(w.workMachineryID) as '农机数量',SUM(w.workLength) as '作业里程',SUM(w.workArea) as '作业面积'
-        from  agricultural_work w,agricultural_machinery m
-        where w.workMachineryID=m.machineryID
+        from  agricultural_work w,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID}
         GROUP BY w.workMachineryID
     </select>
 
     <select id="getStatsWookNum" resultType="java.util.Map">
         SELECT
-        (select count(*)  from agricultural_machinery ) as '农机总数量',
-        (SELECT COUNT(*) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as '今天作业数量',
-        (SELECT COUNT(*)  from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业数量',
-        (SELECT SUM(workArea) from agricultural_work) as '作业总面积',
-        (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as'今天作业面积',
-        (SELECT SUM(workArea)  from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业面积',
-        (SELECT SUM(workLength)  from agricultural_work) as '作业总里程',
-        (SELECT SUM(workLength)  from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as '今天作业里程',
-        (SELECT SUM(workLength)  from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业里程';
-
+        (select count(*)  from agricultural_machinery m,agricultural_user u where u.userID=m.machineryOwner and u.groupID = #{groupID}) as '农机总数量',
+        (SELECT COUNT(*) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as '今天作业数量',
+        (SELECT COUNT(*)  from agricultural_work w,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业数量',
+        (SELECT SUM(workArea) from agricultural_work w,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID}) as '作业总面积',
+        (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as'今天作业面积',
+        (SELECT SUM(workArea)  from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业面积',
+        (SELECT SUM(workLength)  from agricultural_work w,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID}) as '作业总里程',
+        (SELECT SUM(workLength)  from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')) as '今天作业里程',
+        (SELECT SUM(workLength)  from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as '昨日作业里程';
    </select>
 
     <select id="getPastSeven" resultType="java.util.Map">
     select
-    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as 'one',
-    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 2 DAY)) as 'two',
-    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 3 DAY)) as 'three',
-    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 4 DAY)) as 'four',
-    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 5 DAY)) as 'Fives',
-    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 6 DAY)) as 'six',
-    (SELECT SUM(workArea) from agricultural_work where DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 7 DAY)) as 'Seven';
+    (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 DAY)) as 'one',
+    (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 2 DAY)) as 'two',
+    (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 3 DAY)) as 'three',
+    (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 4 DAY)) as 'four',
+    (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 5 DAY)) as 'Fives',
+    (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 6 DAY)) as 'six',
+    (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and DATE_FORMAT(workStartTime,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 7 DAY)) as 'Seven';
     </select>
 
 
     <select id="getDecember" parameterType="String" resultType="java.util.Map">
         <if test="time != null">
             SELECT
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -1 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL 0 MONTH))) as January,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -2 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -1 MONTH))) as February,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -3 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -2 MONTH))) as March,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -4 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -3 MONTH))) as April,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -5 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -4 MONTH))) as May,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -6 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -5 MONTH))) as June,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -7 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -6 MONTH))) as July,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -8 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -7 MONTH))) as August,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -9 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -8 MONTH))) as September,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -10 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -9 MONTH))) as October,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -11 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -10 MONTH))) as November,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -12 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -11 MONTH))) as December;
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -1 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL 0 MONTH))) as January,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -2 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -1 MONTH))) as February,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -3 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -2 MONTH))) as March,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -4 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -3 MONTH))) as April,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -5 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -4 MONTH))) as May,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -6 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -5 MONTH))) as June,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -7 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -6 MONTH))) as July,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -8 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -7 MONTH))) as August,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -9 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -8 MONTH))) as September,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -10 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -9 MONTH))) as October,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -11 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -10 MONTH))) as November,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -12 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(#{time},'%Y-%m-%d'),INTERVAL -11 MONTH))) as December;
 
         </if>
         <if test="time == null">
             SELECT
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -1 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL 0 MONTH))) as January,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -2 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -1 MONTH))) as February,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -3 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -2 MONTH))) as March,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -4 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -3 MONTH))) as April,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -5 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -4 MONTH))) as May,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -6 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -5 MONTH))) as June,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -7 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -6 MONTH))) as July,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -8 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -7 MONTH))) as August,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -9 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -8 MONTH))) as September,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -10 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -9 MONTH))) as October,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -11 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -10 MONTH))) as November,
-            (SELECT SUM(workArea) from agricultural_work where workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -12 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -11 MONTH))) as December;
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -1 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL 0 MONTH))) as January,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -2 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -1 MONTH))) as February,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -3 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -2 MONTH))) as March,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -4 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -3 MONTH))) as April,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -5 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -4 MONTH))) as May,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -6 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -5 MONTH))) as June,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -7 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -6 MONTH))) as July,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -8 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -7 MONTH))) as August,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -9 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -8 MONTH))) as September,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -10 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -9 MONTH))) as October,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -11 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -10 MONTH))) as November,
+            (SELECT SUM(workArea) from agricultural_work w ,agricultural_machinery m,agricultural_user u
+            where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID} and workStartTime > (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -12 MONTH)) and workStartTime &lt; (SELECT DATE_ADD(DATE_FORMAT(NOW(),'%Y-%m-%d'),INTERVAL -11 MONTH))) as December;
         </if>
 
     </select>
 
 
-    <select id="getWorkBycounty" parameterType="String" resultType="map">
-        SELECT workID,village,SUM(workArea) as workArea,SUM(workLength) as workLength,SUM(confirmArea) as  confirmArea
-        from agricultural_work where county = #{county} GROUP BY village
+    <select id="getWorkBycounty"  resultType="map">
+        SELECT workID,w.village,SUM(workArea) as workArea,SUM(workLength) as workLength,SUM(confirmArea) as  confirmArea
+        from agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and  w.county = #{county} and u.groupID = #{groupID}  GROUP BY w.village
     </select>
 
     <select id="getWorkByNo" parameterType="String" resultType="map">
@@ -129,5 +170,14 @@
          (select userName from agricultural_user where userID in (SELECT machineryOwner from agricultural_machinery  where machineryID = workMachineryID )) as userName,
 		(select phone from agricultural_user where userID in (SELECT machineryOwner from agricultural_machinery  where machineryID = workMachineryID )) as phone
 		 from agricultural_work where workMachineryID IN (SELECT machineryID from agricultural_machinery where machineryOwner = #{userID})
+    </select>
+
+    <select id="getByCounty" resultType="java.util.Map">
+
+
+            select w.province,w.city,w.county,COUNT(workMachineryID) as '农机数量',SUM(workLength) as '作业里程',SUM(workArea) as '作业面积'
+            from  agricultural_work w ,agricultural_machinery m,agricultural_user u
+        where w.workMachineryID=m.machineryID and u.userID = m.machineryOwner and u.groupID = #{groupID}  GROUP BY w.county
+
     </select>
 </mapper>

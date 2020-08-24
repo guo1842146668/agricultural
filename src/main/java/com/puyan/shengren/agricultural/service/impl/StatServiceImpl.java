@@ -29,12 +29,13 @@ public class StatServiceImpl implements StatService {
 
 
     @Override
-    public Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime,Date workEndTime) {
+    public Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime,Date workEndTime,Integer groupID) {
         PageHelper.startPage(page,count);
         HashMap hashMap=new HashMap();
         hashMap.put("checkID",checkID);
         hashMap.put("workStartTime",workStartTime);
         hashMap.put("workEndTime",workEndTime);
+        hashMap.put("groupID",groupID);
         List<Map<String, Object>> allByCounty = statDao.getAllByCounty(hashMap);
         if(allByCounty.isEmpty()){
             return ResultUtil.success(null);
@@ -44,9 +45,9 @@ public class StatServiceImpl implements StatService {
     }
 
     @Override
-    public Result getAllByMachineryID(Integer page,Integer count) {
+    public Result getAllByMachineryID(Integer page,Integer count,Integer groupID) {
         PageHelper.startPage(page,count);
-        List<Map<String, Object>> allByMachineryID = statDao.getAllByMachineryID();
+        List<Map<String, Object>> allByMachineryID = statDao.getAllByMachineryID(groupID);
         if(allByMachineryID.isEmpty()){
             return ResultUtil.success(null);
         }
@@ -55,26 +56,26 @@ public class StatServiceImpl implements StatService {
     }
 
     @Override
-    public Result getStatsWookNum() {
-        return ResultUtil.success(statDao.getStatsWookNum());
+    public Result getStatsWookNum(Integer groupID) {
+        return ResultUtil.success(statDao.getStatsWookNum(groupID));
     }
 
     @Override
-    public Result getPastSeven() {
-        return ResultUtil.success(statDao.getPastSeven());
+    public Result getPastSeven(Integer groupID) {
+        return ResultUtil.success(statDao.getPastSeven(groupID));
     }
 
     @Override
-    public Result getDecember(String time) {
+    public Result getDecember(String time,Integer groupID) {
         if(StrUtil.hasBlank(time)  || time.equals("")){
-            return ResultUtil.success(statDao.getDecember(null));
+            return ResultUtil.success(statDao.getDecember(null,groupID));
         }
-        return ResultUtil.success(statDao.getDecember(time));
+        return ResultUtil.success(statDao.getDecember(time,groupID));
     }
 
     @Override
-    public Result getWorkBycounty(String county) {
-        return ResultUtil.success(statDao.getWorkBycounty(county));
+    public Result getWorkBycounty(String county,Integer groupID) {
+        return ResultUtil.success(statDao.getWorkBycounty(county,groupID));
     }
 
     @Override
@@ -90,5 +91,10 @@ public class StatServiceImpl implements StatService {
     @Override
     public Result getWorkByName(Integer  userID) {
         return ResultUtil.success(statDao.getWorkByName(userID));
+    }
+
+    @Override
+    public Result getAllByCounty(Integer groupID) {
+        return ResultUtil.success(statDao.getByCounty(groupID));
     }
 }

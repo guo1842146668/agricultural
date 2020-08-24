@@ -15,21 +15,23 @@ import java.util.Map;
  **/
 public interface StatService {
 
-    Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime, Date workEndTime);
+    Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime, Date workEndTime,Integer groupID);
 
-    Result getAllByMachineryID(Integer page,Integer count);
+    Result getAllByMachineryID(Integer page,Integer count,Integer groupID);
 
-    Result getStatsWookNum();
+    Result getStatsWookNum(Integer groupID);
 
-    Result getPastSeven();
+    Result getPastSeven(Integer groupID);
 
-    Result getDecember(String time);
+    Result getDecember(String time,Integer groupID);
 
-    Result getWorkBycounty(String  county);
+    Result getWorkBycounty(String  county,Integer groupID);
 
     Result getWorkByNo(String  machineryNO);
 
     Result getWorkByvillage(Integer  workID);
 
     Result getWorkByName(Integer  userID);
+
+    Result getAllByCounty(Integer groupID);
 }

@@ -28,7 +28,6 @@ public class ExprotExcel {
      *@auther: yuhua
      *@date: 2019/8/8 15:18
      */
-//	@ResponseBody
     public static void exportAll(List<Map<String,Object>> bankHuizhiList,Map<String,Object> biaotoulsit,HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException {
         //  yyyyMMdd 格式
         Map<String,Object>  errormap=new HashMap<>();
@@ -38,8 +37,6 @@ public class ExprotExcel {
         response.setContentType("application/vnd.ms-excel");
         String fileName = null;
         OutputStream fOut = null;
-       // List<Map<String,Object>> bankHuizhiList = zzfZufangHetongBusiness.queryZufangHetongInfoBySeaInfo(zzfZufangHetong);
-
         try {
             fOut = response.getOutputStream();
             fileName = java.net.URLEncoder.encode("信息_"  + proMonth, "UTF-8");

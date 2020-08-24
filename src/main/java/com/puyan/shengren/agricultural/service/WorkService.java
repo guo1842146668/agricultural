@@ -27,5 +27,5 @@ public interface WorkService {
 
     Result uploadImgs(@RequestParam("file") MultipartFile[] files, Integer workID);
 
-    List<Map<String,Object>> upExcel(Work work,Integer page,Integer count);
+    List<Map<String,Object>> upExcel(Work work);
 }

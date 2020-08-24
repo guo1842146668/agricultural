@@ -32,8 +32,13 @@ public class Role {
     private Integer status;
     @ApiModelProperty(value = "备注")
     private String remark;
+    @ApiModelProperty(value = "分组")
+    private Integer groupID;
 
-    public Role(Integer roleID, String roleName, Date createDate, Integer creator, Date updateDate, Integer updator, Integer status, String remark) {
+    public Role() {
+    }
+
+    public Role(Integer roleID, String roleName, Date createDate, Integer creator, Date updateDate, Integer updator, Integer status, String remark, Integer groupID) {
         this.roleID = roleID;
         this.roleName = roleName;
         this.createDate = createDate;
@@ -42,9 +47,7 @@ public class Role {
         this.updator = updator;
         this.status = status;
         this.remark = remark;
-    }
-
-    public Role() {
+        this.groupID = groupID;
     }
 
     public Integer getRoleID() {
@@ -111,4 +114,11 @@ public class Role {
         this.remark = remark;
     }
 
+    public Integer getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(Integer groupID) {
+        this.groupID = groupID;
+    }
 }

@@ -32,6 +32,7 @@
             <result column="town" property="town"></result>
             <result column="village" property="village"></result>
             <result column="cooperative" property="cooperative"></result>
+            <result column="groupID" property="groupID"></result>
         </collection>
     </resultMap>
     <insert id="insert" parameterType="com.puyan.shengren.agricultural.enity.Machinery">
@@ -72,7 +73,7 @@
         where machineryID=#{machineryID}
     </update>
 
-    <select id="getAll" parameterType="Machinery" resultMap="BaseResultMap">
+    <select id="getAll" parameterType="com.puyan.shengren.agricultural.enity.Machinery" resultMap="BaseResultMap">
         select * from agricultural_machinery m,agricultural_user u where m.machineryOwner=u.userID
         <if test="user!=null">
             <if test="user.userID !=null">
@@ -104,6 +105,9 @@
             </if>
             <if test="user.cooperative !=null">
                 and u.cooperative = #{user.cooperative}
+            </if>
+            <if test="user.groupID !=null">
+                and u.groupID = #{user.groupID}
             </if>
         </if>
         <if test="machineryLicense !=null">

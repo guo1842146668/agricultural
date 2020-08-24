@@ -130,13 +130,11 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public List<Map<String, Object>> upExcel(Work work, Integer page, Integer count) {
-        PageHelper.startPage(page,count);
+    public List<Map<String, Object>> upExcel(Work work) {
         List<Map<String, Object>> maps = workDao.upExcel(work);
         if(maps.isEmpty()){
             return  null;
         }
-        PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(maps);
-        return pageInfo.getList();
+        return maps;
     }
 }

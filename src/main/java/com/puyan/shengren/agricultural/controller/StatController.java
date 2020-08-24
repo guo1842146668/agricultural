@@ -42,8 +42,8 @@ public class StatController {
     })
     @GetMapping("/getAllByCounty")
     @ResponseBody
-    public Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime, Date workEndTime){
-        return statService.getAllByCounty(page, count,checkID,workStartTime,workEndTime);
+    public Result getAllByCounty(Integer page, Integer count, Integer checkID, Date workStartTime, Date workEndTime,Integer groupID){
+        return statService.getAllByCounty(page, count,checkID,workStartTime,workEndTime,groupID);
     }
 
     /**
@@ -61,8 +61,8 @@ public class StatController {
     })
     @GetMapping("/getAllByMachineryID")
     @ResponseBody
-    public Result getAllByMachineryID(Integer page,Integer count){
-        return statService.getAllByMachineryID(page, count);
+    public Result getAllByMachineryID(Integer page,Integer count,Integer groupID){
+        return statService.getAllByMachineryID(page, count,groupID);
     }
 
     /**
@@ -75,8 +75,8 @@ public class StatController {
     @ApiOperation(value="统计所有/昨天/今天/ 的农机数，与作业面积", notes="统计接口")
     @GetMapping("/getStatsWookNum")
     @ResponseBody
-    public Result getStatsWookNum() {
-        return ResultUtil.success(statService.getStatsWookNum());
+    public Result getStatsWookNum(Integer groupID) {
+        return ResultUtil.success(statService.getStatsWookNum(groupID));
     }
 
     /**
@@ -89,8 +89,8 @@ public class StatController {
     @ApiOperation(value="统计过去7天的作业面积", notes="统计过去7天的作业面积接口")
     @GetMapping("/getPastSeven")
     @ResponseBody
-    public Result getPastSeven() {
-        return ResultUtil.success(statService.getPastSeven());
+    public Result getPastSeven(Integer groupID) {
+        return ResultUtil.success(statService.getPastSeven(groupID));
     }
 
 
@@ -104,13 +104,13 @@ public class StatController {
     @ApiOperation(value="统计过去7天的作业面积", notes="统计过去7天的作业面积接口")
     @GetMapping("/getDecember")
     @ResponseBody
-    public Result getDecember(String time) {
-        return statService.getDecember(time);
+    public Result getDecember(String time,Integer groupID) {
+        return statService.getDecember(time,groupID);
     }
 
     @GetMapping("/getWorkBycounty")
-    public Result getWorkBycounty(String county){
-        return statService.getWorkBycounty(county);
+    public Result getWorkBycounty(String county,Integer groupID){
+        return statService.getWorkBycounty(county,groupID);
     }
 
     @GetMapping("/getWorkByNo")
@@ -126,5 +126,12 @@ public class StatController {
     @GetMapping("/getWorkByName")
     public Result getWorkByName(Integer  userID){
         return  statService.getWorkByName(userID);
+    }
+
+    @ApiOperation(value="县/区统计", notes="县/区统计接口")
+    @GetMapping("/getByCounty")
+    @ResponseBody
+    public Result getByCounty(Integer groupID){
+        return statService.getAllByCounty(groupID);
     }
 }

@@ -47,7 +47,7 @@ public class WorkController {
     })
     @PostMapping("/work_insert")
     @ResponseBody
-    public Result insert(@RequestBody Work work){
+    public Result insert(Work work){
         return  workService.insert(work);
     }
 
@@ -121,7 +121,7 @@ public class WorkController {
 
     @GetMapping("/uplodExcel")
     @ResponseBody
-    public Result uplodExcel(Work work, Integer page, Integer count,HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
+    public Result uplodExcel(Work work,HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
         Map<String,Object> biaotoulsit=new HashMap<>();
         biaotoulsit.put("序号","1");
         biaotoulsit.put("用户名","userName");
@@ -140,7 +140,7 @@ public class WorkController {
         biaotoulsit.put("作业结束时间","workEndTime");
         biaotoulsit.put("作业面积","workArea");
         biaotoulsit.put("作业长度","workLength");
-        List<Map<String, Object>> maps = workService.upExcel(work, page, count);
+        List<Map<String, Object>> maps = workService.upExcel(work);
         ExprotExcel.exportAll(maps,biaotoulsit,request,response);
         return ResultUtil.success();
     }

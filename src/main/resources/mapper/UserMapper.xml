@@ -24,10 +24,11 @@
         <result column="town" property="town"></result>
         <result column="village" property="village"></result>
         <result column="cooperative" property="cooperative"></result>
+        <result column="groupID" property="groupID"></result>
     </resultMap>
     <sql id="Base_Column_List" >
     userID, userName, passWord, phone, email, type, status,lastLoginTime,createDate,creator,updateDate,updator,
-    province,city,county,town,village,cooperative
+    province,city,county,town,village,cooperative,groupID
     </sql>
 
     <select id="getUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -38,14 +39,14 @@
     insert into agricultural_user (userID, userName, passWord,
       phone, email, type, status, lastLoginTime, createDate,
       creator, updateDate, updator, province, city, county, town,
-      village, cooperative)
+      village, cooperative,groupID)
     values (
     null , #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
       #{status,jdbcType=INTEGER}, null , now(), #{creator,jdbcType=INTEGER}, null, null,
       #{province,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},
       #{county,jdbcType=VARCHAR},#{town,jdbcType=VARCHAR},
-      #{village,jdbcType=VARCHAR},#{cooperative,jdbcType=VARCHAR}
+      #{village,jdbcType=VARCHAR},#{cooperative,jdbcType=VARCHAR},#{groupID,jdbcType=INTEGER}
       )
     </insert>
 
@@ -100,6 +101,9 @@
             <if test="cooperative !=null">
                 cooperative=#{cooperative,jdbcType=VARCHAR},
             </if>
+            <if test="groupID !=null">
+                groupID=#{groupID,jdbcType=INTEGER},
+            </if>
                 updateDate=now()
         </set>
         where userID=#{userID}
@@ -141,6 +145,9 @@
             <if test="cooperative !=null">
                 and cooperative=#{cooperative,jdbcType=VARCHAR}
             </if>
+            <if test="groupID !=null">
+                and groupID=#{groupID,jdbcType=INTEGER}
+            </if>
         </where>
     </select>
 
@@ -149,6 +156,6 @@
     </update>
 
     <select id="verificationResults" resultType="map">
-        select cooperative,city,county,town,village from agricultural_user
+        select cooperative,city,county,town,village,groupID from agricultural_user
     </select>
 </mapper>

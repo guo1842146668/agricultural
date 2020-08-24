@@ -18,19 +18,21 @@ import java.util.Map;
 public interface StatDao {
     List<Map<String,Object>> getAllByCounty(HashMap map);
 
-    List<Map<String,Object>> getAllByMachineryID();
+    List<Map<String,Object>> getAllByMachineryID(Integer groupID);
 
-    List<Map<String,Object>> getStatsWookNum();
+    List<Map<String,Object>> getStatsWookNum(Integer groupID);
 
-    List<Map<String,Object>> getPastSeven();
+    List<Map<String,Object>> getPastSeven(Integer groupID);
 
-    List<Map<String,Object>> getDecember(String time);
+    List<Map<String,Object>> getDecember(String time,Integer groupID);
 
-    List<Map<String,Object>> getWorkBycounty(String  county);
+    List<Map<String,Object>> getWorkBycounty(String  county,Integer groupID);
 
     List<Map<String,Object>> getWorkByNo(String  machineryNO);
 
     List<Map<String,Object>> getWorkByvillage(Integer  workID);
 
     List<Map<String,Object>> getWorkByName(Integer  userID);
+
+    List<Map<String,Object>> getByCounty(Integer groupID);
 }

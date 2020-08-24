@@ -114,7 +114,7 @@ public class RoleController {
     })
     @PostMapping("/allotRole")
     @ResponseBody
-    public Result allotRole(@Param("roleID") String roleID, @Param("roleID") Integer userID){
+    public Result allotRole(@Param("roleID") Integer roleID, @Param("userID") Integer userID){
         return  roleService.allotRole(roleID,userID);
     }
 
