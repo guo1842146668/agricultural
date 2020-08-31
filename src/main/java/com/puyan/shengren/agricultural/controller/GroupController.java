@@ -6,16 +6,14 @@ import com.puyan.shengren.agricultural.service.GroupService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 /**
  * @author idmin
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/group")
 public class GroupController {
@@ -33,7 +31,7 @@ public class GroupController {
 
     @ApiOperation(value="查询所有分组", notes="查询所有分组接口")
     @GetMapping("listGroup")
-    public Result listGroup(){
-        return  ResultUtil.success(groupService.listGroup());
+    public Result listGroup(Integer UserID){
+        return  ResultUtil.success(groupService.listGroup(UserID));
     }
 }

@@ -21,6 +21,6 @@ public interface GroupDao {
      * 查询所有分组信息
      * @return 分组信息
      */
-    List<Group> listGroup();
+    List<Group> listGroup(Integer UserID);
 
 }

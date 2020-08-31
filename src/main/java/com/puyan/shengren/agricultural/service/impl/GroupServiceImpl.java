@@ -22,7 +22,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> listGroup() {
-        return groupDao.listGroup();
+    public List<Group> listGroup(Integer UserID) {
+        return groupDao.listGroup(UserID);
     }
 }

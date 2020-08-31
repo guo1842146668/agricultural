@@ -11,8 +11,8 @@
         insert  into agricultural_group values(null,#{groupName},1)
     </insert>
 
-    <select id="listGroup" resultType="com.puyan.shengren.agricultural.enity.Group">
-        select * from agricultural_group
+    <select id="listGroup" parameterType="integer" resultType="com.puyan.shengren.agricultural.enity.Group">
+        select * from agricultural_group where createUserID = #{UserID}
     </select>
 
 </mapper>
