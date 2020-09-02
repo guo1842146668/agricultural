@@ -67,7 +67,7 @@ class AgriculturalApplicationTests {
 
     static double  test3(){
         CalculateUtil  calculateUtil=new CalculateUtil();
-       return calculateUtil.getDistance(116.413384,39.910925, 112.459421,34.624263);
+       return calculateUtil.getDistance(113.560539,34.813526, 113.660555,34.800156);
     }
 
     static String  test5(){
@@ -76,7 +76,7 @@ class AgriculturalApplicationTests {
    public static void main(String[] args) throws MalformedURLException {
        //test1();
        // test4();
-       System.out.println(test5());
+       System.out.println(test3());
     }
 
     public static void getCityFromLngAndlat()

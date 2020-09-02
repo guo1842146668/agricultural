@@ -43,12 +43,12 @@
                 <result column="creator" property="creator"></result>
                 <result column="updateDate" property="updateDate"></result>
                 <result column="updator" property="updator"></result>
-                <result column="province" property="province"></result>
-                <result column="city" property="city"></result>
-                <result column="county" property="county"></result>
-                <result column="town" property="town"></result>
-                <result column="village" property="village"></result>
-                <result column="cooperative" property="cooperative"></result>
+                <result column="uprovince" property="uprovince"></result>
+                <result column="ucity" property="ucity"></result>
+                <result column="ucounty" property="ucounty"></result>
+                <result column="utown" property="utown"></result>
+                <result column="uvillage" property="uvillage"></result>
+                <result column="ucooperative" property="ucooperative"></result>
             </collection>
         </collection>
     </resultMap>
@@ -150,23 +150,23 @@
                     <if test="machinery.user.email !=null">
                         and u.email=#{machinery.user.email}
                     </if>
-                    <if test="machinery.user.province !=null">
-                        and u.province=#{machinery.user.province}
+                    <if test="machinery.user.uprovince !=null">
+                        and u.uprovince=#{machinery.user.uprovince}
                     </if>
-                    <if test="machinery.user.city !=null">
-                        and u.city=#{machinery.user.city}
+                    <if test="machinery.user.ucity !=null">
+                        and u.ucity=#{machinery.user.ucity}
                     </if>
-                    <if test="machinery.user.county !=null">
-                        and u.county=#{machinery.user.county}
+                    <if test="machinery.user.ucounty !=null">
+                        and u.ucounty=#{machinery.user.ucounty}
                     </if>
-                    <if test="machinery.user.town !=null">
-                        and u.town=#{machinery.user.town}
+                    <if test="machinery.user.utown !=null">
+                        and u.utown=#{machinery.user.utown}
                     </if>
-                    <if test="machinery.user.village !=null">
-                        and u.village=#{machinery.user.village}
+                    <if test="machinery.user.uvillage !=null">
+                        and u.uvillage=#{machinery.user.uvillage}
                     </if>
-                    <if test="machinery.user.cooperative !=null">
-                        and u.cooperative=#{machinery.user.cooperative}
+                    <if test="machinery.user.ucooperative !=null">
+                        and u.ucooperative=#{machinery.user.ucooperative}
                     </if>
                     <if test="machinery.user.groupID !=null">
                         and u.groupID=#{machinery.user.groupID}
@@ -216,23 +216,23 @@
                 <if test="machinery.user.email !=null">
                     and u.email=#{machinery.user.email}
                 </if>
-                <if test="machinery.user.province !=null">
-                    and u.province=#{machinery.user.province}
+                <if test="machinery.user.uprovince !=null">
+                    and u.uprovince=#{machinery.user.uprovince}
                 </if>
-                <if test="machinery.user.city !=null">
-                    and u.city=#{machinery.user.city}
+                <if test="machinery.user.ucity !=null">
+                    and u.ucity=#{machinery.user.ucity}
                 </if>
-                <if test="machinery.user.county !=null">
-                    and u.county=#{machinery.user.county}
+                <if test="machinery.user.ucounty !=null">
+                    and u.ucounty=#{machinery.user.ucounty}
                 </if>
-                <if test="machinery.user.town !=null">
-                    and u.town=#{machinery.user.town}
+                <if test="machinery.user.utown !=null">
+                    and u.utown=#{machinery.user.utown}
                 </if>
-                <if test="machinery.user.village !=null">
-                    and u.village=#{machinery.user.village}
+                <if test="machinery.user.uvillage !=null">
+                    and u.uvillage=#{machinery.user.uvillage}
                 </if>
-                <if test="machinery.user.cooperative !=null">
-                    and u.cooperative=#{machinery.user.cooperative}
+                <if test="machinery.user.ucooperative !=null">
+                    and u.ucooperative=#{machinery.user.ucooperative}
                 </if>
                 <if test="machinery.user.groupID !=null">
                     and u.groupID=#{machinery.user.groupID}

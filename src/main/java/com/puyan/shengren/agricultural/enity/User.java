@@ -39,24 +39,24 @@ public class User {
     @ApiModelProperty(value = "更新人")
     private Integer updator;
     @ApiModelProperty(value = "省")
-    private String province;
+    private String uprovince;
     @ApiModelProperty(value = "市")
-    private String city;
+    private String ucity;
     @ApiModelProperty(value = "县")
-    private String county;
+    private String ucounty;
     @ApiModelProperty(value = "镇")
-    private String town;
+    private String utown;
     @ApiModelProperty(value = "村")
-    private String village;
+    private String uvillage;
     @ApiModelProperty(value = "合作社")
-    private String cooperative;
+    private String ucooperative;
     @ApiModelProperty(value = "分组ID")
     private Integer groupID;
 
     public User() {
     }
 
-    public User(Integer userID, String userName, String passWord, String phone, String email, Integer type, Integer status, Date lastLoginTime, Date createDate, Integer creator, Date updateDate, Integer updator, String province, String city, String county, String town, String village, String cooperative, Integer groupID) {
+    public User(Integer userID, String userName, String passWord, String phone, String email, Integer type, Integer status, Date lastLoginTime, Date createDate, Integer creator, Date updateDate, Integer updator, String uprovince, String ucity, String ucounty, String utown, String uvillage, String ucooperative, Integer groupID) {
         this.userID = userID;
         this.userName = userName;
         this.passWord = passWord;
@@ -69,12 +69,12 @@ public class User {
         this.creator = creator;
         this.updateDate = updateDate;
         this.updator = updator;
-        this.province = province;
-        this.city = city;
-        this.county = county;
-        this.town = town;
-        this.village = village;
-        this.cooperative = cooperative;
+        this.uprovince = uprovince;
+        this.ucity = ucity;
+        this.ucounty = ucounty;
+        this.utown = utown;
+        this.uvillage = uvillage;
+        this.ucooperative = ucooperative;
         this.groupID = groupID;
     }
 
@@ -174,52 +174,52 @@ public class User {
         this.updator = updator;
     }
 
-    public String getProvince() {
-        return province;
+    public String getUprovince() {
+        return uprovince;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setUprovince(String uprovince) {
+        this.uprovince = uprovince;
     }
 
-    public String getCity() {
-        return city;
+    public String getUcity() {
+        return ucity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setUcity(String ucity) {
+        this.ucity = ucity;
     }
 
-    public String getCounty() {
-        return county;
+    public String getUcounty() {
+        return ucounty;
     }
 
-    public void setCounty(String county) {
-        this.county = county;
+    public void setUcounty(String ucounty) {
+        this.ucounty = ucounty;
     }
 
-    public String getTown() {
-        return town;
+    public String getUtown() {
+        return utown;
     }
 
-    public void setTown(String town) {
-        this.town = town;
+    public void setUtown(String utown) {
+        this.utown = utown;
     }
 
-    public String getVillage() {
-        return village;
+    public String getUvillage() {
+        return uvillage;
     }
 
-    public void setVillage(String village) {
-        this.village = village;
+    public void setUvillage(String uvillage) {
+        this.uvillage = uvillage;
     }
 
-    public String getCooperative() {
-        return cooperative;
+    public String getUcooperative() {
+        return ucooperative;
     }
 
-    public void setCooperative(String cooperative) {
-        this.cooperative = cooperative;
+    public void setUcooperative(String ucooperative) {
+        this.ucooperative = ucooperative;
     }
 
     public Integer getGroupID() {

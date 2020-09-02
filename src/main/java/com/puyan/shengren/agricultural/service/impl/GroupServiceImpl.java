@@ -6,7 +6,9 @@ import com.puyan.shengren.agricultural.service.GroupService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author idmin
@@ -17,8 +19,11 @@ public class GroupServiceImpl implements GroupService {
     private GroupDao groupDao;
 
     @Override
-    public int saveGroup(String groupName) {
-        return groupDao.saveGroup(groupName);
+    public int saveGroup(String groupName,Integer createUserID) {
+        Map<String,Object> map=new HashMap<>();
+        map.put("groupName",groupName);
+        map.put("createUserID",createUserID);
+        return groupDao.saveGroup(map);
     }
 
     @Override

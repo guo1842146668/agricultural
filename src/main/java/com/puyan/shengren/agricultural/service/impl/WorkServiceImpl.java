@@ -49,12 +49,11 @@ public class WorkServiceImpl implements WorkService {
             return ResultUtil.error(400,"录入失败");
         }
         Work byWorkID = workDao.getByWorkID(work.getWorkID());
-        String workStartMap = work.getWorkStartMap();
-        String[] split = workStartMap.split(",");
-        String[] split1 = byWorkID.getWorkStartMap().split(",");
+        String[] split = work.getWorkStartMap().split(",");
+        String[] split1 = byWorkID.getWorkEndMap().split(",");
         double distance = CalculateUtil.getDistance(Double.parseDouble(split[0]), Double.parseDouble(split[1]), Double.parseDouble(split1[0]), Double.parseDouble(split1[1]));
         Machinery machineryByID = machineryDao.getMachineryByID(byWorkID.getWorkMachineryID());
-        Double machineryWidth = distance * machineryByID.getMachineryWidth();
+        Double machineryWidth = distance/1000 * machineryByID.getMachineryWidth();
         work.setWorkArea(machineryWidth);
         work.setWorkLength(distance);
         workDao.update(work);

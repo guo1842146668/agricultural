@@ -26,12 +26,12 @@
             <result column="creator" property="creator"></result>
             <result column="updateDate" property="updateDate"></result>
             <result column="updator" property="updator"></result>
-            <result column="province" property="province"></result>
-            <result column="city" property="city"></result>
-            <result column="county" property="county"></result>
-            <result column="town" property="town"></result>
-            <result column="village" property="village"></result>
-            <result column="cooperative" property="cooperative"></result>
+            <result column="uprovince" property="uprovince"></result>
+            <result column="ucity" property="ucity"></result>
+            <result column="ucounty" property="ucounty"></result>
+            <result column="utown" property="utown"></result>
+            <result column="uvillage" property="uvillage"></result>
+            <result column="ucooperative" property="ucooperative"></result>
             <result column="groupID" property="groupID"></result>
         </collection>
     </resultMap>
@@ -88,23 +88,23 @@
             <if test="user.email !=null">
                 and u.email = #{user.email}
             </if>
-            <if test="user.province !=null">
-                and u.province = #{user.province}
+            <if test="user.uprovince !=null">
+                and u.uprovince = #{user.uprovince}
             </if>
-            <if test="user.city !=null">
-                and u.city = #{user.city}
+            <if test="user.ucity !=null">
+                and u.ucity = #{user.ucity}
             </if>
-            <if test="user.county !=null">
-                and u.county = #{user.county}
+            <if test="user.ucounty !=null">
+                and u.ucounty = #{user.ucounty}
             </if>
-            <if test="user.town !=null">
-                and u.town = #{user.town}
+            <if test="user.utown !=null">
+                and u.utown = #{user.utown}
             </if>
-            <if test="user.village !=null">
-                and u.village = #{user.village}
+            <if test="user.uvillage !=null">
+                and u.uvillage = #{user.uvillage}
             </if>
-            <if test="user.cooperative !=null">
-                and u.cooperative = #{user.cooperative}
+            <if test="user.ucooperative !=null">
+                and u.ucooperative = #{user.ucooperative}
             </if>
             <if test="user.groupID !=null">
                 and u.groupID = #{user.groupID}

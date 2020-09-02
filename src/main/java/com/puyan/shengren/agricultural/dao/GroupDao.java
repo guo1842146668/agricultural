@@ -4,6 +4,7 @@ import com.puyan.shengren.agricultural.enity.Group;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author idmin
@@ -12,10 +13,10 @@ import java.util.List;
 public interface GroupDao {
     /**
      * 录入分组信息
-     * @param groupName 分组名称
+     * @param  map 分组名称
      * @return 录入成功否
      */
-    int saveGroup(String groupName);
+    int saveGroup(Map<String,Object> map);
 
     /**
      * 查询所有分组信息

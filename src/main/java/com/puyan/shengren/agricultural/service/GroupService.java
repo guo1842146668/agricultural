@@ -13,7 +13,7 @@ public interface GroupService {
      * @param groupName 分组名称
      * @return 录入成功否
      */
-    int saveGroup(String groupName);
+    int saveGroup(String groupName,Integer createUserID);
 
     /**
      * 查询所有分组信息

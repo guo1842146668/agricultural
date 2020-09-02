@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
         }
         //密码加密
         user.setPassWord(SecureUtil.md5(user.getPassWord()));
+        user.setType(2);
         //初始状态为 1
         user.setStatus(1);
         int resCount=userDao.insert(user);

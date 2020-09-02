@@ -18,17 +18,17 @@
         <result column="creator" property="creator"></result>
         <result column="updateDate" property="updateDate"></result>
         <result column="updator" property="updator"></result>
-        <result column="province" property="province"></result>
-        <result column="city" property="city"></result>
-        <result column="county" property="county"></result>
-        <result column="town" property="town"></result>
-        <result column="village" property="village"></result>
-        <result column="cooperative" property="cooperative"></result>
+        <result column="uprovince" property="uprovince"></result>
+        <result column="ucity" property="ucity"></result>
+        <result column="ucounty" property="ucounty"></result>
+        <result column="utown" property="utown"></result>
+        <result column="uvillage" property="uvillage"></result>
+        <result column="ucooperative" property="ucooperative"></result>
         <result column="groupID" property="groupID"></result>
     </resultMap>
     <sql id="Base_Column_List" >
     userID, userName, passWord, phone, email, type, status,lastLoginTime,createDate,creator,updateDate,updator,
-    province,city,county,town,village,cooperative,groupID
+    uprovince,ucity,ucounty,utown,uvillage,ucooperative,groupID
     </sql>
 
     <select id="getUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -38,15 +38,15 @@
     <insert id="insert" parameterType="com.puyan.shengren.agricultural.enity.User" >
     insert into agricultural_user (userID, userName, passWord,
       phone, email, type, status, lastLoginTime, createDate,
-      creator, updateDate, updator, province, city, county, town,
-      village, cooperative,groupID)
+      creator, updateDate, updator, uprovince, ucity, ucounty, utown,
+      uvillage, ucooperative,groupID)
     values (
     null , #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
       #{status,jdbcType=INTEGER}, null , now(), #{creator,jdbcType=INTEGER}, null, null,
-      #{province,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},
-      #{county,jdbcType=VARCHAR},#{town,jdbcType=VARCHAR},
-      #{village,jdbcType=VARCHAR},#{cooperative,jdbcType=VARCHAR},#{groupID,jdbcType=INTEGER}
+      #{uprovince,jdbcType=VARCHAR},#{ucity,jdbcType=VARCHAR},
+      #{ucounty,jdbcType=VARCHAR},#{utown,jdbcType=VARCHAR},
+      #{uvillage,jdbcType=VARCHAR},#{ucooperative,jdbcType=VARCHAR},#{groupID,jdbcType=INTEGER}
       )
     </insert>
 
@@ -83,23 +83,23 @@
             <if test="updator !=null">
                 updator=#{updator,jdbcType=INTEGER},
             </if>
-            <if test="province !=null">
-                province=#{province,jdbcType=VARCHAR},
+            <if test="uprovince !=null">
+                uprovince=#{uprovince,jdbcType=VARCHAR},
             </if>
-            <if test="city !=null">
-                city=#{city,jdbcType=VARCHAR},
+            <if test="ucity !=null">
+                ucity=#{ucity,jdbcType=VARCHAR},
             </if>
-            <if test="county !=null">
-                county=#{county,jdbcType=VARCHAR},
+            <if test="ucounty !=null">
+                ucounty=#{ucounty,jdbcType=VARCHAR},
             </if>
-            <if test="town !=null">
-                town=#{town,jdbcType=VARCHAR},
+            <if test="utown !=null">
+                utown=#{utown,jdbcType=VARCHAR},
             </if>
-            <if test="village !=null">
-                village=#{village,jdbcType=VARCHAR},
+            <if test="uvillage !=null">
+                uvillage=#{uvillage,jdbcType=VARCHAR},
             </if>
-            <if test="cooperative !=null">
-                cooperative=#{cooperative,jdbcType=VARCHAR},
+            <if test="ucooperative !=null">
+                ucooperative=#{ucooperative,jdbcType=VARCHAR},
             </if>
             <if test="groupID !=null">
                 groupID=#{groupID,jdbcType=INTEGER},
@@ -127,23 +127,23 @@
             <if test="status !=null">
                 and status = #{status,jdbcType=INTEGER}
             </if>
-            <if test="province !=null">
-                and province=#{province,jdbcType=VARCHAR}
+            <if test="uprovince !=null">
+                and uprovince=#{uprovince,jdbcType=VARCHAR}
             </if>
-            <if test="city !=null">
-                and city=#{city,jdbcType=VARCHAR}
+            <if test="ucity !=null">
+                and ucity=#{ucity,jdbcType=VARCHAR}
             </if>
-            <if test="county !=null">
-                and county=#{county,jdbcType=VARCHAR}
+            <if test="ucounty !=null">
+                and ucounty=#{ucounty,jdbcType=VARCHAR}
             </if>
-            <if test="town !=null">
-                and town=#{town,jdbcType=VARCHAR}
+            <if test="utown !=null">
+                and utown=#{utown,jdbcType=VARCHAR}
             </if>
-            <if test="village !=null">
-                and village=#{village,jdbcType=VARCHAR}
+            <if test="uvillage !=null">
+                and uvillage=#{uvillage,jdbcType=VARCHAR}
             </if>
-            <if test="cooperative !=null">
-                and cooperative=#{cooperative,jdbcType=VARCHAR}
+            <if test="ucooperative !=null">
+                and ucooperative=#{ucooperative,jdbcType=VARCHAR}
             </if>
             <if test="groupID !=null">
                 and groupID=#{groupID,jdbcType=INTEGER}
@@ -156,6 +156,6 @@
     </update>
 
     <select id="verificationResults" resultType="map">
-        select cooperative,city,county,town,village,groupID from agricultural_user
+        select ucooperative,ucity,ucounty,utown,uvillage,groupID from agricultural_user
     </select>
 </mapper>

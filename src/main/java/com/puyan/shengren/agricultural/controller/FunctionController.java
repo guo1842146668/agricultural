@@ -26,13 +26,13 @@ public class FunctionController {
     @Resource
     private FunctionService functionService;
     
-  /*  *//**
+  /**
      * @Author guoyangyang
      * @Description  根据用户ID获取对应权限
      * @Date  2020/7/22 15:43
      * @Param * @param userID:
      * @return * @return: com.puyan.shengren.agricultural.common.Result
-     **//*
+     **/
     @ApiOperation(value="根据用户ID获取对应权限", notes="根据用户ID获取对应权限接口")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userID", value = "用户ID", required = true ,dataType = "Integer"),
@@ -41,7 +41,7 @@ public class FunctionController {
     @ResponseBody
     public Result getFunctionByUserID(Integer userID){
         return functionService.getFunctionByUserID(userID);
-    }*/
+    }
     
     /**
      * @Author guoyangyang

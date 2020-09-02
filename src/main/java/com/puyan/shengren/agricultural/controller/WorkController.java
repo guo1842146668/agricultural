@@ -26,7 +26,7 @@ import java.util.Map;
  * @Date: 2020/7/23 14:36
  * @Version: 1.0
  **/
-@Api(value = "WorkController", description = "作业信息控制类")
+@Api(value = "WorkController", tags = "作业信息控制类")
 @CrossOrigin
 @RestController
 @RequestMapping("/work")
@@ -121,27 +121,27 @@ public class WorkController {
 
     @GetMapping("/uplodExcel")
     @ResponseBody
-    public Result uplodExcel(Work work,HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
-        Map<String,Object> biaotoulsit=new HashMap<>();
-        biaotoulsit.put("序号","1");
-        biaotoulsit.put("用户名","userName");
-        biaotoulsit.put("所属区域/省","province");
-        biaotoulsit.put("所属区域/市","city");
-        biaotoulsit.put("所属区域/县","county");
-        biaotoulsit.put("所属区域/镇","town");
-        biaotoulsit.put("所属区域/村","village");
-        biaotoulsit.put("所属区域/合作社","cooperative");
-        biaotoulsit.put("车辆编号","machineryNO");
-        biaotoulsit.put("农机名称","machineryBrand");
-        biaotoulsit.put("车宽","machineryWidth");
-        biaotoulsit.put("车主电话","phone");
-        biaotoulsit.put("核对面积","confirmArea");
-        biaotoulsit.put("作业开始时间","workStartTime");
-        biaotoulsit.put("作业结束时间","workEndTime");
-        biaotoulsit.put("作业面积","workArea");
-        biaotoulsit.put("作业长度","workLength");
+    public Result uploadExcel(Work work,HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
+        Map<String,Object> headerList=new HashMap<>();
+        headerList.put("序号","1");
+        headerList.put("用户名","userName");
+        headerList.put("所属区域/省","province");
+        headerList.put("所属区域/市","city");
+        headerList.put("所属区域/县","county");
+        headerList.put("所属区域/镇","town");
+        headerList.put("所属区域/村","village");
+        headerList.put("所属区域/合作社","cooperative");
+        headerList.put("车辆编号","machineryNO");
+        headerList.put("农机名称","machineryBrand");
+        headerList.put("车宽","machineryWidth");
+        headerList.put("车主电话","phone");
+        headerList.put("核对面积","confirmArea");
+        headerList.put("作业开始时间","workStartTime");
+        headerList.put("作业结束时间","workEndTime");
+        headerList.put("作业面积","workArea");
+        headerList.put("作业长度","workLength");
         List<Map<String, Object>> maps = workService.upExcel(work);
-        ExprotExcel.exportAll(maps,biaotoulsit,request,response);
+        ExprotExcel.exportAll(maps,headerList,request,response);
         return ResultUtil.success();
     }
 

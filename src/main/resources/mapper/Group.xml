@@ -7,8 +7,8 @@
         <result column="groupName" property="groupName"/>
         <result column="groupStatus" property="groupStatus"/>
     </resultMap>
-    <insert id="saveGroup" parameterType="String">
-        insert  into agricultural_group values(null,#{groupName},1)
+    <insert id="saveGroup" parameterType="map">
+        insert  into agricultural_group values(null,#{groupName},1,#{createUserID})
     </insert>
 
     <select id="listGroup" parameterType="integer" resultType="com.puyan.shengren.agricultural.enity.Group">

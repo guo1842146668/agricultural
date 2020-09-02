@@ -25,8 +25,8 @@ public class GroupController {
             @ApiImplicitParam(name = "groupName", value = "分组名称", required = true ,dataType = "String"),
     })
     @PostMapping("/saveGroup")
-    public Result saveGroup(String groupName){
-        return ResultUtil.success(groupService.saveGroup(groupName));
+    public Result saveGroup(String groupName,Integer createUserID){
+        return ResultUtil.success(groupService.saveGroup(groupName,createUserID));
     }
 
     @ApiOperation(value="查询所有分组", notes="查询所有分组接口")
